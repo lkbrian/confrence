@@ -11,7 +11,7 @@ export default function Gallery() {
             <img
               src={src}
               alt={`Conference highlight ${index + 1}`}
-              className={`w-full object-cover ${tall ? 'h-72' : 'h-48'}`}
+              className={`w-full object-cover ${tall ? 'h-80' : 'h-48'}`}
             />
           </div>
         ))}

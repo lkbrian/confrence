@@ -101,16 +101,24 @@ export const testimonials: Testimonial[] = [
 ]
 
 export const gallery = [
-  { src: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=900&q=80', tall: false },
-  { src: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=900&q=80', tall: true },
-  { src: 'https://images.unsplash.com/photo-1515168833906-d2a3b82b302a?auto=format&fit=crop&w=900&q=80', tall: false },
-  { src: 'https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=900&q=80', tall: true },
-  { src: 'https://images.unsplash.com/photo-1459180136908-f0ef55009efc?auto=format&fit=crop&w=900&q=80', tall: false },
-  { src: 'src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=2200&q=80', tall: true },
-  { src: 'https://images.unsplash.com/photo-1560523159-4a9692d222ef?auto=format&fit=crop&w=900&q=80', tall: false },
-  { src: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=900&q=80', tall: true },
-  { src: 'https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=900&q=80', tall: false },
-  { src: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=900&q=80', tall: false },
+  { src: '/gallery/IMG_6916.jpg', tall: false },
+  { src: '/gallery/IMG_7512.jpg', tall: true },
+  { src: '/gallery/IMG_8026.jpg', tall: true },
+  { src: '/gallery/IMG_8038.jpg', tall: true },
+  { src: '/gallery/IMG_8082.jpg', tall: false },
+  { src: '/gallery/IMG_8086.jpg', tall: true },
+  { src: '/gallery/IMG_8121.jpg', tall: false },
+  { src: '/gallery/IMG_8465.jpg', tall: true },
+  { src: '/gallery/IMG_8468.jpg', tall: false },
+  { src: '/gallery/IMG_8512.jpg', tall: true },
+  { src: '/gallery/IMG_8557.jpg', tall: false },
+  { src: '/gallery/IMG_8725.jpg', tall: true },
+  { src: '/gallery/IMG_9194.jpg', tall: false },
+  { src: '/gallery/IMG_9623.jpg', tall: true },
+  { src: '/gallery/IMG_7353.jpg', tall: true },
+  { src: '/gallery/IMG_7403.jpg', tall: false },
+  { src: '/gallery/IMG_7418.jpg', tall: false },
+  { src: '/gallery/IMG_7484.jpg', tall: false },
 ]
 
 export const faqs: [string, string][] = [

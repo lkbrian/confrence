@@ -10,6 +10,7 @@ export default function Theme() {
           eyebrow="Conference Theme"
           title="Strengthened to Lead, Equipped to Serve"
           text="A call to lead from spiritual depth, build healthy teams, and serve communities with wisdom and courage."
+          strokeWord="Theme"
         />
         <blockquote className="rounded-lg bg-[#fd015b] p-8 text-white shadow-xl">
           <Quote className="mb-6 text-[#F6C62B]" size={38} />

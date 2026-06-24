@@ -5,7 +5,7 @@ import SectionHeading from './SectionHeading'
 export default function Schedule() {
   return (
     <section id="schedule" className="px-5 py-20 lg:px-8">
-      <SectionHeading eyebrow="Conference Schedule" title="Three days of worship, teaching, workshops, and prayer." />
+      <SectionHeading eyebrow="Conference Schedule" title="Three days of worship, teaching, workshops, and prayer." strokeWord="Schedule" />
       <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-3">
         {schedule.map((day) => (
           <article key={day.day} className="rounded-lg border border-stone-200 bg-white p-6 shadow-sm">

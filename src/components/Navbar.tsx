@@ -21,7 +21,7 @@ export default function Navbar() {
         </div>
         <a
           href="#register"
-          className="hidden items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-[800] text-stone-950 transition hover:bg-amber-200 md:inline-flex"
+          className="hidden items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-stone-950 transition hover:bg-amber-200 md:inline-flex"
         >
           Register <ArrowRight size={16} />
         </a>

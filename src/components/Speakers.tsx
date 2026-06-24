@@ -4,7 +4,7 @@ import SectionHeading from './SectionHeading'
 export default function Speakers() {
   return (
     <section id="speakers" className="bg-linear-to-br from-[#4A1CCF] via-[#3D4ECF] to-[#2E1A8C] px-5 py-20 text-white lg:px-8">
-      <SectionHeading eyebrow="Featured Speakers" title="Experienced voices for pastoral formation." light />
+      <SectionHeading eyebrow="Featured Speakers" title="Experienced voices for pastoral formation." light strokeWord="Speakers" />
       <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-3">
         {speakers.map((speaker) => (
           <article key={speaker.name} className="overflow-hidden rounded-lg bg-white text-stone-900">

@@ -1,10 +1,11 @@
+import SectionHeading from './SectionHeading'
+
 export default function Venue() {
   return (
     <section className="px-5 py-20 lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr]">
         <div>
-          <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#F2B21A]">Venue</p>
-          <h2 className="mt-3 text-4xl font-extrabold">Jubilee Convention Centre</h2>
+          <SectionHeading eyebrow="Venue" title="Jubilee Convention Centre" align="start" strokeWord="Venue" />
           <p className="mt-4 text-lg leading-8 text-stone-600">
             Waiyaki Way, Nairobi. Main auditorium, breakout rooms, prayer chapel, book tables, and sponsor space.
           </p>

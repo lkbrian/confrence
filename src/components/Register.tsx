@@ -35,7 +35,7 @@ export default function Register() {
 
   return (
     <section id="register" className="bg-linear-to-br from-[#4A1CCF] via-[#3D4ECF] to-[#2E1A8C] px-5 py-20 text-white lg:px-8">
-      <SectionHeading eyebrow="Registration" title="Register for the Conference" light />
+      <SectionHeading eyebrow="Registration" title="Register for the Conference" light strokeWord="Register" />
       <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-[1fr_1.4fr]">
 
         <article className="rounded-2xl border border-white/20 bg-white/10 p-8 text-white">

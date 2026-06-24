@@ -41,7 +41,7 @@ export default function Testimonials() {
       <div className="absolute inset-0 bg-[#111]/80" />
 
       <div className="relative px-5 lg:px-8">
-        <SectionHeading eyebrow="Success Stories" title="What pastors say after attending." light />
+        <SectionHeading eyebrow="Success Stories" title="What pastors say after attending." light strokeWord="Stories" />
 
         <div className="mx-auto max-w-5xl">
           <div className="grid gap-5 md:grid-cols-2">

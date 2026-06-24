@@ -11,7 +11,7 @@ const contactItems = [
 export default function Contact() {
   return (
     <section id="contact" className="px-5 py-20 lg:px-8">
-      <SectionHeading eyebrow="Contact" title="Talk to the conference team." />
+      <SectionHeading eyebrow="Contact" title="Talk to the conference team." strokeWord="Contact" />
       <div className="mx-auto grid max-w-5xl gap-4 md:grid-cols-2 lg:grid-cols-4">
         {contactItems.map(({ Icon, label, value }) => (
           <div key={label} className="rounded-lg border border-stone-200 bg-white p-6 shadow-sm">

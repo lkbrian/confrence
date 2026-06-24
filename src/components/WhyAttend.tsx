@@ -12,7 +12,7 @@ const items = [
 export default function WhyAttend() {
   return (
     <section className="px-5 py-20 lg:px-8">
-      <SectionHeading eyebrow="Why Attend" title="Built around the work pastors actually carry." />
+      <SectionHeading eyebrow="Why Attend" title="Built around the work pastors actually carry." strokeWord="Why" />
       <div className="mx-auto grid max-w-7xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {items.map(({ icon: Icon, label }) => (
           <div key={label} className="flex items-center gap-3 rounded-lg border border-stone-200 bg-white p-5 shadow-sm">

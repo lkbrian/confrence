@@ -4,14 +4,14 @@ import SectionHeading from './SectionHeading'
 export default function Gallery() {
   return (
     <section className="bg-white px-5 py-20 lg:px-8">
-      <SectionHeading eyebrow="Gallery" title="Photos from previous conferences and event highlights." />
-      <div className="mx-auto max-w-7xl columns-2 gap-4 md:columns-3 lg:columns-4">
+      <SectionHeading align='start' eyebrow="Gallery" title="Photos from previous conferences and event highlights." />
+      <div className="mx-auto columns-2 gap-4 md:columns-3 lg:columns-4">
         {gallery.map(({ src, tall }, index) => (
-          <div key={src} className="mb-4 break-inside-avoid overflow-hidden rounded-lg">
+          <div key={src} className="mb-4 break-inside-avoid overflow-hidden">
             <img
               src={src}
               alt={`Conference highlight ${index + 1}`}
-              className={`w-full object-cover ${tall ? 'h-80' : 'h-48'}`}
+              className={`w-full object-cover ${tall ? 'h-112' : 'h-75'}`}
             />
           </div>
         ))}

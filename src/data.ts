@@ -5,7 +5,7 @@ export const whyAttend = [
   'Ministry growth',
   'Networking with other pastors',
   'Spiritual renewal',
-  'Cross-generational mentorship',
+  'Trans-generational mentorship',
 ]
 
 export type Speaker = {
@@ -46,7 +46,7 @@ export const schedule: ScheduleDay[] = [
   {
     day: 'Day 1',
     date: 'Monday, 6th October',
-    items: ['Opening worship and prayer', 'Keynote: Cross-generational mentorship', 'Pastors roundtable dinner'],
+    items: ['Opening worship and prayer', 'Keynote: Trans-generational mentorship', 'Pastors roundtable dinner'],
   },
   {
     day: 'Day 2',
@@ -83,7 +83,7 @@ export const testimonials: Testimonial[] = [
     name: 'Rev. Angela M.',
   },
   {
-    quote: 'Meeting pastors from across Kenya reminded me we are not alone in this calling. Truly transformative.',
+    quote: 'Meeting pastors from aTrans Kenya reminded me we are not alone in this calling. Truly transformative.',
     name: 'Bishop Samuel O.',
   },
   {

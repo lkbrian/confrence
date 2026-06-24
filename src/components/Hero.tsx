@@ -43,7 +43,7 @@ export default function Hero() {
             animate="show"
             custom={0.35}
           >
-            Theme: Cross-Generational Mentorship. A national gathering for pastors across AIC Kenya — pursuing renewal, legacy, and Spirit-led leadership together.
+            Theme: Trans-Generational Mentorship. A national gathering for pastors aTrans AIC Kenya — pursuing renewal, legacy, and Spirit-led leadership together.
           </motion.p>
 
           <motion.div
@@ -63,7 +63,7 @@ export default function Hero() {
 
           <motion.div
             className="mt-10 flex flex-col gap-3 sm:flex-row"
-            initial={{ opacity: 0, x: 60, y: 20 }}
+            initial={{ opacity: 0, x: 60, y: 0 }}
             animate={{ opacity: 1, x: 0, y: 0 }}
             transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] as const, delay: 0.8 }}
           >

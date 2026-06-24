@@ -6,7 +6,7 @@ const items = [
   { icon: Sprout, label: 'Ministry growth' },
   { icon: Users, label: 'Networking with other pastors' },
   { icon: Flame, label: 'Spiritual renewal' },
-  { icon: GitBranch, label: 'Cross-generational mentorship' },
+  { icon: GitBranch, label: 'Trans-generational mentorship' },
 ]
 
 export default function WhyAttend() {

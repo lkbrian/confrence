@@ -13,6 +13,7 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 0.875rem;
 }
 
 body {
@@ -29,7 +30,12 @@ a {
   background: #4A1CCF;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: "Montserrat", system-ui, sans-serif;
 }
 

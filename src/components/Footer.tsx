@@ -3,7 +3,7 @@ import { navItems } from '../data'
 
 export default function Footer() {
   return (
-    <footer className="bg-[#111] px-5 py-10 text-white lg:px-8">
+    <footer className="bg-brand-dark px-5 py-10 text-white lg:px-8">
       <div className="mx-auto flex max-w-7xl flex-col gap-6 md:flex-row md:items-center md:justify-between">
         <div>
           <p className="text-xl font-extrabold">Shepherds Advance Conference 2026</p>
@@ -19,7 +19,7 @@ export default function Footer() {
         <div className="flex gap-3">
           <MessageCircle />
           <Users />
-          <a href="#register" className="rounded-full bg-[#F2B21A] px-5 py-2 font-bold text-[#2E1A8C]">
+          <a href="#register" className="rounded-full bg-brand-red px-5 py-2 font-bold text-white">
             Register
           </a>
         </div>

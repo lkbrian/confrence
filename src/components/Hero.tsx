@@ -2,7 +2,7 @@ import { ArrowRight, CalendarDays, MapPin } from 'lucide-react'
 import { motion, type Variants } from 'framer-motion'
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 32 },
+  hidden: { opacity: 0, y: 25 },
   show: (delay: number) => ({
     opacity: 1,
     y: 0,
@@ -10,19 +10,62 @@ const fadeUp: Variants = {
   }),
 }
 
+// SVG fills its container; pattern tiles infinitely across any size
+function MeshGrid() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-full w-full"
+      aria-hidden="true"
+    >
+      <defs>
+        <pattern
+          id="hero-mesh"
+          x="0" y="0"
+          width="44" height="44"
+          patternUnits="userSpaceOnUse"
+        >
+          <rect width="44" height="44" fill="none" stroke="rgba(255,255,255,0.12)" strokeWidth="0.5" />
+          <line x1="0" y1="0" x2="44" y2="44" stroke="rgba(255,255,255,0.06)" strokeWidth="0.5" />
+          <line x1="44" y1="0" x2="0" y2="44" stroke="rgba(255,255,255,0.06)" strokeWidth="0.5" />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#hero-mesh)" />
+    </svg>
+  )
+}
 
 export default function Hero() {
   return (
-    <section id="hero" className="relative min-h-[92svh] overflow-hidden bg-[#111] pt-24 text-white">
+    <section id="hero" className="relative min-h-[98svh] overflow-hidden bg-brand-dark pt-24 text-white">
+
+      {/* Background image: scales in from 1.15 → 1 while blur clears */}
       <motion.img
         src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=2200&q=80"
         alt="Conference attendees gathered for a leadership event"
-        className="absolute inset-0 h-full w-full object-cover opacity-30"
-        initial={{ scale: 1.08 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 2, ease: [0.25, 0.1, 0.25, 1] as const }}
+        className="absolute inset-0 h-full w-full object-cover"
+        initial={{ scale: 1.15, filter: 'blur(24px)', opacity: 0.15 }}
+        animate={{ scale: 1,   filter: 'blur(0px)',  opacity: 0.35 }}
+        transition={{ duration: 2.4, ease: [0.25, 0.1, 0.25, 1] as const }}
       />
-      <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(74,28,207,0.88),rgba(61,78,207,0.72),rgba(46,26,140,0.90))]" />
+
+      {/* Colour gradient overlay */}
+      <div className="absolute inset-0 bg-[linear-gradient(135deg,#111111E0,#042a35CC,#4d9f6c33)]" />
+
+      {/*
+        Mesh grid — right half, drops in from above once the hero image finishes
+        its scale-out (delay matches the 2.4 s image transition).
+        No x movement. No loop. One drop, then stays.
+      */}
+      <motion.div
+        className="pointer-events-none absolute right-0 inset-y-0"
+        style={{ width: '65%' }}
+        initial={{ y: '-60%', opacity: 0, filter: 'blur(20px)' }}
+        animate={{ y: '0%',   opacity: 1, filter: 'blur(0px)' }}
+        transition={{ duration: 1.6, delay: 2.4, ease: [0.25, 0.1, 0.25, 1] as const }}
+      >
+        <MeshGrid />
+      </motion.div>
 
       <div className="relative mx-auto grid min-h-[calc(92svh-6rem)] max-w-7xl items-center gap-12 px-5 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:px-8">
         <div>
@@ -43,7 +86,7 @@ export default function Hero() {
             animate="show"
             custom={0.35}
           >
-            Theme: Trans-Generational Mentorship. A national gathering for pastors aTrans AIC Kenya — pursuing renewal, legacy, and Spirit-led leadership together.
+            Theme: Trans-Generational Mentorship. A national gathering for pastors across AIC Kenya — pursuing renewal, legacy, and Spirit-led leadership together.
           </motion.p>
 
           <motion.div
@@ -54,10 +97,10 @@ export default function Hero() {
             custom={0.55}
           >
             <span className="flex w-fit items-center gap-3">
-              <CalendarDays className="text-[#F6C62B]" /> 6th – 8th October 2026
+              <CalendarDays className="text-brand-green" /> 6th – 8th October 2026
             </span>
             <span className="flex w-fit items-center gap-3">
-              <MapPin className="text-[#F6C62B]" /> AIC Milimani, Nairobi
+              <MapPin className="text-brand-green" /> AIC Milimani, Nairobi
             </span>
           </motion.div>
 
@@ -69,7 +112,7 @@ export default function Hero() {
           >
             <a
               href="#register"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#F2B21A] px-7 py-2 font-bold text-[#2E1A8C] transition hover:bg-[#F6C62B]"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-red px-7 py-2 font-bold text-white transition hover:bg-brand-green"
             >
               Register Now <ArrowRight size={18} />
             </a>

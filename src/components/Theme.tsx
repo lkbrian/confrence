@@ -12,12 +12,12 @@ export default function Theme() {
           text="A call to lead from spiritual depth, build healthy teams, and serve communities with wisdom and courage."
           strokeWord="Theme"
         />
-        <blockquote className="rounded-lg bg-[#fd015b] p-8 text-white shadow-xl">
-          <Quote className="mb-6 text-[#F6C62B]" size={38} />
+        <blockquote className="rounded-lg bg-brand-dark p-8 text-white shadow-xl">
+          <Quote className="mb-6 text-brand-green" size={38} />
           <p className="playfair-italic text-2xl font-bold leading-10">
             "Be strong and courageous. Do not be frightened, and do not be dismayed, for the Lord your God is with you wherever you go."
           </p>
-          <cite className="mt-6 block font-semibold text-[#F2B21A]">Joshua 1:9</cite>
+          <cite className="mt-6 block font-semibold text-brand-cream">Joshua 1:9</cite>
         </blockquote>
       </div>
     </section>

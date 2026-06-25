@@ -17,7 +17,7 @@ import WhyAttend from './components/WhyAttend'
 
 function App() {
   return (
-    <main className="min-h-screen bg-[#f7f4ee] text-stone-900">
+    <main className="min-h-screen bg-brand-cream text-stone-900">
       <Navbar />
       <Hero />
       <About />
@@ -28,8 +28,8 @@ function App() {
       <Tracks />
       <Venue />
       <Register />
-      <Testimonials />
       <Gallery />
+      <Testimonials />
       <Sponsors />
       <FAQ />
       <Contact />

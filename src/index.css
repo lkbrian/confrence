@@ -1,10 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital@0,400;1,400&family=League+Spartan:wght@900&display=swap');
 @import "tailwindcss";
 
+@theme {
+  --color-brand-red: #d20205;
+  --color-brand-dark: #042a35;
+  --color-brand-green: #4d9f6c;
+  --color-brand-cream: #fff2e2;
+}
+
 :root {
   font-family: "Outfit", system-ui, sans-serif;
   color: #1f2933;
-  background: #f7f4ee;
+  background: #fff2e2;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -27,7 +34,7 @@ a {
 
 ::selection {
   color: #ffffff;
-  background: #4A1CCF;
+  background: #d20205;
 }
 
 h1,

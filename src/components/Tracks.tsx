@@ -15,8 +15,8 @@ export default function Tracks() {
       <SectionHeading eyebrow="Session Topics" title="Tracks for every major area of church leadership." strokeWord="Topics" />
       <div className="mx-auto grid max-w-7xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {topics.map(({ icon: Icon, label }) => (
-          <div key={label} className="flex items-center gap-3 rounded-lg bg-[#f7f4ee] p-5">
-            <Icon className="shrink-0 text-[#F2B21A]" size={20} />
+          <div key={label} className="flex items-center gap-3 rounded-lg bg-brand-cream p-5">
+            <Icon className="shrink-0 text-brand-red" size={20} />
             <h3 className="font-extrabold">{label}</h3>
           </div>
         ))}

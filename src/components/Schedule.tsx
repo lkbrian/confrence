@@ -9,14 +9,14 @@ export default function Schedule() {
       <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-3">
         {schedule.map((day) => (
           <article key={day.day} className="rounded-lg border border-stone-200 bg-white p-6 shadow-sm">
-            <p className="flex items-center gap-2 font-bold text-[#F2B21A]">
+            <p className="flex items-center gap-2 font-bold text-brand-red">
               <Clock3 size={18} /> {day.date}
             </p>
             <h3 className="mt-3 text-3xl font-extrabold">{day.day}</h3>
             <ul className="mt-5 space-y-3 text-stone-600">
               {day.items.map((item) => (
                 <li key={item} className="flex gap-3">
-                  <CheckCircle2 className="mt-0.5 shrink-0 text-[#F2B21A]" size={18} />
+                  <CheckCircle2 className="mt-0.5 shrink-0 text-brand-red" size={18} />
                   {item}
                 </li>
               ))}

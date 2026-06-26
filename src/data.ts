@@ -1,3 +1,6 @@
+import type { Speaker, ScheduleDay, Testimonial } from './lib/types/data'
+export type { Speaker, ScheduleDay, Testimonial }
+
 export const navItems = ['About', 'Theme', 'Speakers', 'Schedule', 'Register', 'Contact']
 
 export const whyAttend = [
@@ -7,13 +10,6 @@ export const whyAttend = [
   'Spiritual renewal',
   'Trans-generational mentorship',
 ]
-
-export type Speaker = {
-  name: string
-  ministry: string
-  bio: string
-  image: string
-}
 
 export const speakers: Speaker[] = [
   {
@@ -35,12 +31,6 @@ export const speakers: Speaker[] = [
     image: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=crop&w=900&q=80',
   },
 ]
-
-export type ScheduleDay = {
-  day: string
-  date: string
-  items: string[]
-}
 
 export const schedule: ScheduleDay[] = [
   {
@@ -67,11 +57,6 @@ export const tracks = [
   'Church Administration',
   'Technology & Media Ministry',
 ]
-
-export type Testimonial = {
-  quote: string
-  name: string
-}
 
 export const testimonials: Testimonial[] = [
   {

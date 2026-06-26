@@ -1,14 +1,6 @@
-type Props = {
-  eyebrow: string
-  title: string
-  text?: string
-  light?: boolean
-  align?: 'start' | 'center' | 'end'
-  className?: string
-  strokeWord?: string
-}
+import type { SectionHeadingProps } from '../lib/types/ui'
 
-export default function SectionHeading({ eyebrow, title, text, light = false, align = 'center', className = '', strokeWord }: Props) {
+export default function SectionHeading({ eyebrow, title, text, light = false, align = 'center', className = '', strokeWord }: SectionHeadingProps) {
   const isCenter = align === 'center'
   return (
     <div className={`relative mb-10 max-w-3xl ${isCenter ? 'mx-auto text-center' : 'text-start'} ${className}`}>

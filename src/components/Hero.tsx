@@ -2,10 +2,27 @@ import { ArrowRight, CalendarDays, MapPin } from 'lucide-react'
 import { motion, type Variants } from 'framer-motion'
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 25 },
+  hidden: { opacity: 0, y: 25, },
   show: (delay: number) => ({
     opacity: 1,
     y: 0,
+    transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay },
+  }),
+}
+const fadedown: Variants = {
+  hidden: { opacity: 0, y: -25, },
+  show: (delay: number) => ({
+    opacity: 1,
+    y: 0,
+
+    transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay },
+  }),
+}
+const fadeleft: Variants = {
+  hidden: { opacity: 0, x: -50 },
+  show: (delay: number) => ({
+    opacity: 1,
+    x: 0,
     transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay },
   }),
 }
@@ -26,8 +43,8 @@ function MeshGrid() {
           patternUnits="userSpaceOnUse"
         >
           <rect width="44" height="44" fill="none" stroke="rgba(255,255,255,0.12)" strokeWidth="0.5" />
-          <line x1="0" y1="0" x2="44" y2="44" stroke="rgba(255,255,255,0.06)" strokeWidth="0.5" />
-          <line x1="44" y1="0" x2="0" y2="44" stroke="rgba(255,255,255,0.06)" strokeWidth="0.5" />
+          <line x1="0" y1="0" x2="44" y2="44" stroke="rgba(255,255,255,0.12)" strokeWidth="0.5" />
+          <line x1="44" y1="0" x2="0" y2="44" stroke="rgba(255,255,255,0.12)" strokeWidth="0.5" />
         </pattern>
       </defs>
       <rect width="100%" height="100%" fill="url(#hero-mesh)" />
@@ -45,8 +62,8 @@ export default function Hero() {
         alt="Conference attendees gathered for a leadership event"
         className="absolute inset-0 h-full w-full object-cover"
         initial={{ scale: 1.15, filter: 'blur(24px)', opacity: 0.15 }}
-        animate={{ scale: 1,   filter: 'blur(0px)',  opacity: 0.35 }}
-        transition={{ duration: 2.4, ease: [0.25, 0.1, 0.25, 1] as const }}
+        animate={{ scale: 1, filter: 'blur(0px)', opacity: 0.35 }}
+        transition={{ duration: 1.25, ease: [0.25, 0.1, 0.25, 1] as const }}
       />
 
       {/* Colour gradient overlay */}
@@ -59,10 +76,14 @@ export default function Hero() {
       */}
       <motion.div
         className="pointer-events-none absolute right-0 inset-y-0"
-        style={{ width: '65%' }}
+        style={{
+          width: "45%",
+          WebkitMaskImage: "linear-gradient(to left, black 70%, transparent 100%)",
+          maskImage: "linear-gradient(to left, black 70%, transparent 100%)",
+        }}
         initial={{ y: '-60%', opacity: 0, filter: 'blur(20px)' }}
-        animate={{ y: '0%',   opacity: 1, filter: 'blur(0px)' }}
-        transition={{ duration: 1.6, delay: 2.4, ease: [0.25, 0.1, 0.25, 1] as const }}
+        animate={{ y: '0%', opacity: 0.8, filter: 'blur(0px)' }}
+        transition={{ duration: 1.15, delay: 1.2, ease: [0.25, 0.1, 0.25, 1] as const }}
       >
         <MeshGrid />
       </motion.div>
@@ -74,27 +95,27 @@ export default function Hero() {
             variants={fadeUp}
             initial="hidden"
             animate="show"
-            custom={0.1}
+            custom={1.15}
           >
-            3rd AIC National Pastors' Conference 2026
+            3rd AIC National <span className='playfair-italic'>Pastors Conference</span>  2026
           </motion.h1>
 
           <motion.p
             className="mt-6 max-w-2xl text-xl leading-8 text-white/82"
-            variants={fadeUp}
+            variants={fadedown}
             initial="hidden"
             animate="show"
-            custom={0.35}
+            custom={1.25}
           >
             Theme: Trans-Generational Mentorship. A national gathering for pastors across AIC Kenya — pursuing renewal, legacy, and Spirit-led leadership together.
           </motion.p>
 
           <motion.div
             className="mt-8 grid w-fit gap-5 text-base font-semibold sm:grid-cols-2"
-            variants={fadeUp}
+            variants={fadeleft}
             initial="hidden"
             animate="show"
-            custom={0.55}
+            custom={1.35}
           >
             <span className="flex w-fit items-center gap-3">
               <CalendarDays className="text-brand-green" /> 6th – 8th October 2026
@@ -108,7 +129,7 @@ export default function Hero() {
             className="mt-10 flex gap-3 flex-row"
             initial={{ opacity: 0, x: 60, y: 0 }}
             animate={{ opacity: 1, x: 0, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] as const, delay: 0.8 }}
+            transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1] as const, delay: 1.35 }}
           >
             <a
               href="#register"

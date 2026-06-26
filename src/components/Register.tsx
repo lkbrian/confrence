@@ -2,13 +2,12 @@ import { ArrowRight, CheckCircle2, Loader2 } from 'lucide-react'
 import { useState } from 'react'
 import { submitRegistration } from '../lib/supabase'
 import SectionHeading from './SectionHeading'
+import type { RegistrationStatus } from '../lib/types/ui'
 
 const included = ['Conference materials', 'Meals during the event', 'Facilitator costs']
 
-type Status = 'idle' | 'loading' | 'success' | 'error'
-
 export default function Register() {
-  const [status, setStatus] = useState<Status>('idle')
+  const [status, setStatus] = useState<RegistrationStatus>('idle')
   const [errorMsg, setErrorMsg] = useState('')
 
   async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {

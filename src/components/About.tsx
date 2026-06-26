@@ -21,7 +21,7 @@ export default function About() {
           <article key={title} className="rounded-lg border border-stone-200 bg-white p-6 shadow-sm">
             <div className="flex flex-col gap-3 md:flex-row text-xl font-bold">
               <div className="relative">
-                <h3 className="absolute -top-8 left-0 text-7xl md:text-8xl font-black text-transparent opacity-30 [-webkit-text-stroke:0.5px_#111]">
+                <h3 className="absolute -top-6 left-0 text-7xl md:text-8xl font-black text-transparent opacity-30 [-webkit-text-stroke:0.5px_#111] display">
                   0{index + 1}
                 </h3>
 

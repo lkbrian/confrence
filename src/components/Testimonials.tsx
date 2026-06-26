@@ -9,18 +9,14 @@ const PER_PAGE = 2
 const PAGE_COUNT = Math.ceil(testimonials.length / PER_PAGE)
 
 const cardVariants: Variants = {
-  // enter from the right
   hidden: (i: number) => ({
-    opacity: 0,
     x: 80,
     transition: { delay: i * 0.08 },
   }),
   show: (i: number) => ({
-    opacity: 1,
     x: 0,
     transition: { duration: 0.5, delay: i * 0.12, ease: [0.25, 0.1, 0.25, 1] },
   }),
-  // exit to the left
   exit: {
     opacity: 0,
     x: -80,

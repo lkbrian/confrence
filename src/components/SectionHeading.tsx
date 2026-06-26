@@ -7,7 +7,7 @@ export default function SectionHeading({ eyebrow, title, text, light = false, al
       {strokeWord && (
         <span
           aria-hidden="true"
-          className={`pointer-events-none absolute -top-6 ${isCenter ? 'left-1/2 -translate-x-1/2' : 'left-0'} select-none text-6xl font-black leading-none text-transparent font-['League_Spartan',sans-serif] ${light ? 'opacity-30 [-webkit-text-stroke:0.5px_#4d9f6c]' : 'opacity-30 [-webkit-text-stroke:0.5px_#042a35]'}`}
+          className={`pointer-events-none absolute -top-5 ${isCenter ? 'left-1/2 -translate-x-1/2' : 'left-0'} select-none text-6xl font-black leading-none text-transparent display ${light ? 'opacity-20 [-webkit-text-stroke:0.5px_#4d9f6c]' : 'opacity-25 [-webkit-text-stroke:0.5px_#042a35]'} uppercase`}
         >
           {strokeWord}
         </span>

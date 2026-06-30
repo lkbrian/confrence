@@ -1,9 +1,9 @@
 import SectionHeading from './SectionHeading'
 
 const cards = [
-  ['Vision and purpose', 'To renew pastors and equip churches for Spirit-led leadership and lasting community impact.'],
-  ['Who should attend', 'Senior pastors, associate pastors, ministry heads, administrators, youth leaders, and spouses.'],
-  ['What you gain', 'Fresh perspective, useful systems, ministry friendships, teaching resources, and renewed conviction.'],
+  ['Vision and Purpose', 'This conference exists to equip local pastors with practical ministry tools, foster deep spiritual renewal, and align leadership teams to address contemporary societal challenges with unified, strategic action.'],
+  ['Who Should Attend', 'Bishops, reverends, all local church pastors, associate pastors, chaplains, other church leaders, and administrators.'],
+  ['What You Gain', 'Personal Renewal, Actionable Strategies, Strategic Partnerships, Cultural Clarity, and Peer Mentorship.'],
 ] as const
 
 export default function About() {
@@ -11,7 +11,7 @@ export default function About() {
     <section id="about" className="px-5 py-20 lg:px-8 container mx-auto">
       <SectionHeading
         eyebrow="About the Conference"
-        title="A practical space for leaders carrying real ministry responsibility."
+        title="A practical space to equip, encourage, and align church leaders."
         align="start"
         strokeWord="About"
       />

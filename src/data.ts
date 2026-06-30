@@ -4,58 +4,110 @@ export type { Speaker, ScheduleDay, Testimonial }
 export const navItems = ['About', 'Theme', 'Speakers', 'Schedule', 'Register', 'Contact']
 
 export const whyAttend = [
-  'Leadership development',
-  'Ministry growth',
-  'Networking with other pastors',
-  'Spiritual renewal',
-  'Trans-generational mentorship',
+  'Personal Renewal',
+  'Actionable Strategies',
+  'Strategic Partnerships',
+  'Cultural Clarity',
+  'Peer Mentorship',
 ]
 
 export const speakers: Speaker[] = [
   {
-    name: 'Bishop Daniel Mwangi',
-    ministry: 'Kingdom Life Chapel',
-    bio: 'A pastoral leadership mentor focused on church health, prayer culture, and sustainable ministry teams.',
+    name: 'Rev. Abraham Mulwa',
+    ministry: 'Presiding Bishop, AIC Kenya',
+    bio: 'Leading the Africa Inland Church Kenya with a vision for spiritual renewal, unified leadership, and trans-generational impact across the nation.',
     image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=900&q=80',
   },
   {
-    name: 'Pastor Miriam Adeyemi',
-    ministry: 'Grace City Church',
-    bio: 'A discipleship strategist helping churches build strong families, leaders, and next-generation ministries.',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=900&q=80',
+    name: 'Kevin Howard',
+    ministry: 'Plenary Speaker',
+    bio: 'Equipping pastoral leaders in mutual trust, vulnerability, and constructive conflict resolution between generations in ministry.',
+    image: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=crop&w=900&q=80',
   },
   {
-    name: 'Rev. Caleb Otieno',
-    ministry: 'Harvest Mission Network',
-    bio: 'An evangelism trainer equipping pastors to mobilize churches for mission, outreach, and community impact.',
-    image: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=crop&w=900&q=80',
+    name: 'Prof. Frank Njenga',
+    ministry: 'Plenary Speaker',
+    bio: 'A distinguished psychiatrist addressing the escalating crisis of pastoral burnout and advocating for holistic mentorship that prioritizes emotional wellness.',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=900&q=80',
+  },
+  {
+    name: 'Daniel Woodring',
+    ministry: 'Plenary Speaker',
+    bio: 'Exploring authority versus collaboration and frameworks for reverse mentorship — where younger pastors help older leaders navigate digital culture and shifting landscapes.',
+    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=900&q=80',
+  },
+  {
+    name: 'Pr. Bill Ndindi',
+    ministry: 'Plenary Speaker',
+    bio: 'Navigating generational clashes in preaching styles, technology usage, and community engagement across Baby Boomer, Gen X, Millennial, and Gen Z pastors.',
+    image: '/speakers/bill.jpg',
+  },
+  {
+    name: 'Dr. Garry Dull',
+    ministry: 'Pastoral Charge Speaker',
+    bio: 'Examining the Mosaic-Joshua and Elijah-Elisha paradigms — biblical models of intentional leadership handoffs and the weight of spiritual inheritance.',
+    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80',
+  },
+  {
+    name: 'Bishop Kipsoi',
+    ministry: 'Pastoral Charge Speaker',
+    bio: 'Analyzing 1 and 2 Timothy to extract timeless principles for training younger, culturally distinct leaders in the Pauline mentorship tradition.',
+    image: '/speakers/dkipsoi.jpg',
+  },
+  {
+    name: 'Jeff Colleman',
+    ministry: 'Track Facilitator',
+    bio: 'Leading the Church-Government Relationship track — equipping pastors to engage civic structures with wisdom, biblical integrity, and prophetic clarity.',
+    image: 'https://images.unsplash.com/photo-1463453091185-61582044d556?auto=format&fit=crop&w=900&q=80',
   },
 ]
 
 export const schedule: ScheduleDay[] = [
   {
     day: 'Day 1',
-    date: 'Monday, 6th October',
-    items: ['Opening worship and prayer', 'Keynote: Trans-generational mentorship', 'Pastors roundtable dinner'],
+    date: 'Tuesday, 6th October',
+    items: [
+      'Registration & Hymn Moment',
+      'Host Welcome – Bishop Dr. Stephen Mairori',
+      'Devotion & Conference Opening – Rev. Abraham Mulwa',
+      'Pastors Conference Testimonials',
+      'Plenary 1: Mutual Trust and Vulnerability – Kevin Howard',
+      'Panel Interview',
+      'Plenary 2: Mental Health and Pastoral Wellness – Prof. Frank Njenga',
+      'Pastoral Charge 1: The Mosaic-Joshua Paradigm – Dr. Garry Dull',
+    ],
   },
   {
     day: 'Day 2',
-    date: 'Tuesday, 7th October',
-    items: ['Morning devotion', 'Leadership and ministry growth sessions', 'Workshop blocks and networking'],
+    date: 'Wednesday, 7th October',
+    items: [
+      'Registration & Hymn Moment',
+      'Devotions – Prof. Jonathan Mwania, VC Scott Christian University',
+      'Plenary 3: Authority vs. Collaboration – Daniel Woodring',
+      'Plenary 4: Clashing Ministry Philosophies – Bill Ndindi',
+      'Break Away Sessions',
+      'Pastoral Charge 2: Pauline Mentorship Models – Bishop Kipsoi',
+    ],
   },
   {
     day: 'Day 3',
-    date: 'Wednesday, 8th October',
-    items: ['Prayer summit', 'Generational legacy sessions', 'Commissioning service'],
+    date: 'Thursday, 8th October',
+    items: [
+      'Registration & Hymn Moment',
+      'Devotions – Prof. Tim Kiruhi, VC International Leadership University',
+      'Plenary 5: Conflict & Culture – Navigating Friction Constructively – Kevin Howard',
+      'Plenary 6: Reverse Mentorship in Ministry – Daniel Woodring',
+      'Pastoral Charge 3: The Elijah-Elisha Succession – Dr. Garry Dull',
+      'Conference Closing, Resolutions & Certification – Rev. Abraham Mulwa',
+    ],
   },
 ]
 
 export const tracks = [
-  'Church Leadership',
-  'Evangelism & Discipleship',
-  'Youth & Family Ministry',
-  'Church Administration',
-  'Technology & Media Ministry',
+  'Church-Government Relationship',
+  'Youth, Culture and Faith',
+  'Technology and Media in Ministry',
+  'Preparation for Retirement',
 ]
 
 export const testimonials: Testimonial[] = [

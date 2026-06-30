@@ -54,3 +54,9 @@ h6 {
 .display {
   font-family: "League Spartan", sans-serif;
 }
+
+.card {
+  transform-origin: center center;
+  transition: transform 120ms linear;
+  will-change: transform, opacity, filter;
+}

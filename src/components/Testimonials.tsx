@@ -1,115 +1,111 @@
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react'
-import { AnimatePresence, motion, type Variants } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
+import useEmblaCarousel from 'embla-carousel-react'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useCallback, useEffect, useRef } from 'react'
 import { testimonials } from '../data'
 import SectionHeading from './SectionHeading'
 
-const INTERVAL_MS = 6000
-const PER_PAGE = 2
-const PAGE_COUNT = Math.ceil(testimonials.length / PER_PAGE)
-
-const cardVariants: Variants = {
-  hidden: (i: number) => ({
-    x: 80,
-    transition: { delay: i * 0.08 },
-  }),
-  show: (i: number) => ({
-    x: 0,
-    transition: { duration: 0.5, delay: i * 0.12, ease: [0.25, 0.1, 0.25, 1] },
-  }),
-  exit: {
-    opacity: 0,
-    x: -80,
-    transition: { duration: 0.35, ease: [0.25, 0.1, 0.25, 1] },
-  },
-}
+const TWEEN_FACTOR = 3
 
 export default function Testimonials() {
-  const [page, setPage] = useState(0)
-  const timer = useRef<ReturnType<typeof setInterval> | null>(null)
+  const sectionRef = useRef<HTMLElement>(null)
 
-  const startTimer = () => {
-    if (timer.current) clearInterval(timer.current)
-    timer.current = setInterval(() => {
-      setPage((p) => (p + 1) % PAGE_COUNT)
-    }, INTERVAL_MS)
-  }
+  // Parallax: track scroll relative to the section entering/leaving the viewport
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  })
+  // Image moves at 30% of the scroll speed (±15% travel)
+  const bgY = useTransform(scrollYProgress, [0, 1], ['-15%', '15%'])
+
+  // Embla carousel
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'center' })
+
+  const applyTween = useCallback(() => {
+    if (!emblaApi) return
+    const progress = emblaApi.scrollProgress()
+    const snaps = emblaApi.scrollSnapList()
+
+    emblaApi.slideNodes().forEach((slide, i) => {
+      let diff = (snaps[i] ?? 0) - progress
+      if (diff > 0.5) diff -= 1
+      if (diff < -0.5) diff += 1
+      const t = Math.max(0, 1 - Math.abs(diff) * TWEEN_FACTOR)
+      slide.style.transform = `scale(${0.82 + 0.18 * t})`
+      slide.style.opacity = String(0.45 + 0.55 * t)
+    })
+  }, [emblaApi])
 
   useEffect(() => {
-    startTimer()
-    return () => { if (timer.current) clearInterval(timer.current) }
-  }, [])
+    if (!emblaApi) return
+    applyTween()
+    emblaApi.on('scroll', applyTween)
+    emblaApi.on('reInit', applyTween)
+    return () => {
+      emblaApi.off('scroll', applyTween)
+      emblaApi.off('reInit', applyTween)
+    }
+  }, [emblaApi, applyTween])
 
-  const goTo = (index: number) => {
-    setPage(index)
-    startTimer()
-  }
-
-  const visible = testimonials.slice(page * PER_PAGE, page * PER_PAGE + PER_PAGE)
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi])
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi])
 
   return (
-    <section className="relative overflow-hidden py-24 text-white">
-      <img
+    <section ref={sectionRef} className="relative overflow-hidden py-24 text-white">
+
+      {/* Parallax background — 130% tall so it never shows a gap while moving */}
+      <motion.img
         src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=2000&q=80"
         alt=""
         aria-hidden="true"
-        className="absolute inset-0 h-full w-full object-cover"
+        style={{ y: bgY, top: '-15%', height: '130%' }}
+        className="absolute inset-x-0 w-full object-cover"
       />
+
       <div className="absolute inset-0 bg-[#042a35CC]" />
 
       <div className="relative px-5 lg:px-8">
-        <SectionHeading eyebrow="Success Stories" title="What pastors say after attending." light strokeWord="Stories" />
+        <SectionHeading
+          eyebrow="Success Stories"
+          title="What pastors say after attending."
+          light
+          strokeWord="Stories"
+        />
 
-        <div className="mx-auto max-w-5xl">
-          <div className="overflow-hidden">
-          <AnimatePresence mode="wait">
-            <div key={page} className="grid gap-5 md:grid-cols-2">
-              {visible.map((item, i) => (
-                <motion.blockquote
+        <div className="relative mx-auto max-w-5xl">
+          <button
+            onClick={scrollPrev}
+            aria-label="Previous testimonial"
+            className="absolute -left-3 top-1/2 z-10 flex size-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur-sm transition hover:bg-white/20 sm:-left-5 lg:-left-7"
+          >
+            <ChevronLeft size={20} />
+          </button>
+          <button
+            onClick={scrollNext}
+            aria-label="Next testimonial"
+            className="absolute -right-3 top-1/2 z-10 flex size-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur-sm transition hover:bg-white/20 sm:-right-5 lg:-right-7"
+          >
+            <ChevronRight size={20} />
+          </button>
+
+          <div className="overflow-hidden" ref={emblaRef}>
+            <div className="flex">
+              {testimonials.map((item) => (
+                <div
                   key={item.name}
-                  custom={i}
-                  variants={cardVariants}
-                  initial="hidden"
-                  animate="show"
-                  exit="exit"
-                  className="rounded-lg border border-white/20 bg-white p-6 backdrop-blur-sm"
+                  className="min-w-0 flex-[0_0_85%] px-3 sm:flex-[0_0_50%] lg:flex-[0_0_40%]"
+                  style={{ willChange: 'transform, opacity' }}
                 >
-                  <Quote className="text-brand-red" />
-                  <p className="mt-4 text-xl font-semibold leading-8 text-slate-800">"{item.quote}"</p>
-                  <cite className="mt-5 block font-bold text-slate-800">{item.name}</cite>
-                </motion.blockquote>
+                  <blockquote className="rounded-lg border border-white/20 bg-white p-6 backdrop-blur-sm">
+                    <Quote className="text-brand-red" />
+                    <p className="mt-4 text-lg font-semibold leading-8 text-slate-800">
+                      "{item.quote}"
+                    </p>
+                    <cite className="mt-5 block font-bold not-italic text-slate-800">{item.name}</cite>
+                  </blockquote>
+                </div>
               ))}
             </div>
-          </AnimatePresence>
-          </div>
-
-          <div className="mt-8 flex items-center justify-center gap-4">
-            <button
-              onClick={() => goTo((page - 1 + PAGE_COUNT) % PAGE_COUNT)}
-              aria-label="Previous"
-              className="flex size-10 cursor-pointer items-center justify-center rounded-full border border-white/30 bg-white/10 text-white transition hover:bg-white/20"
-            >
-              <ChevronLeft size={20} />
-            </button>
-
-            {Array.from({ length: PAGE_COUNT }).map((_, i) => (
-              <button
-                key={i}
-                onClick={() => goTo(i)}
-                aria-label={`Go to page ${i + 1}`}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  i === page ? 'w-8 bg-brand-red' : 'w-2 bg-white/40 hover:bg-white/60'
-                }`}
-              />
-            ))}
-
-            <button
-              onClick={() => goTo((page + 1) % PAGE_COUNT)}
-              aria-label="Next"
-              className="flex size-10 cursor-pointer items-center justify-center rounded-full border border-white/30 bg-white/10 text-white transition hover:bg-white/20"
-            >
-              <ChevronRight size={20} />
-            </button>
           </div>
         </div>
       </div>

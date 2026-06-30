@@ -8,16 +8,16 @@ export default function Theme() {
         <SectionHeading
           align='start'
           eyebrow="Conference Theme"
-          title="Strengthened to Lead, Equipped to Serve"
-          text="A call to lead from spiritual depth, build healthy teams, and serve communities with wisdom and courage."
+          title="Trans-Generational Mentorship"
+          text="A call to bridge the experience gap, ensure leadership continuity, and foster mutual accountability between generations of pastors."
           strokeWord="Theme"
         />
         <blockquote className="rounded-lg bg-brand-dark p-8 text-white shadow-xl">
           <Quote className="mb-6 text-brand-green" size={38} />
-          <p className="playfair-italic text-2xl font-bold leading-10">
-            "Be strong and courageous. Do not be frightened, and do not be dismayed, for the Lord your God is with you wherever you go."
+          <p className="outfit-italic text-xl  leading-10">
+            "We will not hide them from their descendants; we will tell the next generation the praiseworthy deeds of the Lord, his power, and the wonders he has done."
           </p>
-          <cite className="mt-6 block font-semibold text-brand-cream">Joshua 1:9</cite>
+          <cite className="mt-6 block playfair-italic text-xl font-semibold text-brand-cream">Psalm 78:4-7</cite>
         </blockquote>
       </div>
     </section>

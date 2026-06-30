@@ -1,12 +1,12 @@
-import { Flame, GitBranch, Sprout, TrendingUp, Users } from 'lucide-react'
+import { Flame, Handshake, Lightbulb, Telescope, Users } from 'lucide-react'
 import SectionHeading from './SectionHeading'
 
 const items = [
-  { icon: TrendingUp, label: 'Leadership development' },
-  { icon: Sprout, label: 'Ministry growth' },
-  { icon: Users, label: 'Networking with other pastors' },
-  { icon: Flame, label: 'Spiritual renewal' },
-  { icon: GitBranch, label: 'Trans-generational mentorship' },
+  { icon: Flame, label: 'Personal Renewal' },
+  { icon: Lightbulb, label: 'Actionable Strategies' },
+  { icon: Handshake, label: 'Strategic Partnerships' },
+  { icon: Telescope, label: 'Cultural Clarity' },
+  { icon: Users, label: 'Peer Mentorship' },
 ]
 
 export default function WhyAttend() {

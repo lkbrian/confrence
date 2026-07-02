@@ -28,3 +28,9 @@ export type Sponsor = {
   name: string
   image: string
 }
+
+export type CommitteeMember = {
+  name: string
+  title: string
+  image: string
+}

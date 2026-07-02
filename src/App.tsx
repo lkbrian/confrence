@@ -1,4 +1,5 @@
 import About from './components/About'
+import Committee from './components/Committee'
 import Contact from './components/Contact'
 import FAQ from './components/FAQ'
 import Footer from './components/Footer'
@@ -13,7 +14,6 @@ import Testimonials from './components/Testimonials'
 import Topics from './components/Topics'
 import Tracks from './components/Tracks'
 import Venue from './components/Venue'
-import WhyAttend from './components/WhyAttend'
 
 function App() {
   return (
@@ -21,9 +21,9 @@ function App() {
       <Navbar />
       <Hero />
       <About />
-      <WhyAttend />
-      <Speakers />
+      <Committee />
       <Schedule />
+      <Speakers />
       <Topics />
       <Tracks />
       <Venue />

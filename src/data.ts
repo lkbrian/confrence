@@ -1,7 +1,7 @@
-import type { Speaker, ScheduleDay, Testimonial, Topic, Sponsor } from './lib/types/data'
-export type { Speaker, ScheduleDay, Testimonial, Topic, Sponsor }
+import type { Speaker, ScheduleDay, Testimonial, Topic, Sponsor, CommitteeMember } from './lib/types/data'
+export type { Speaker, ScheduleDay, Testimonial, Topic, Sponsor, CommitteeMember }
 
-export const navItems = ['About', 'Speakers', 'Schedule', 'Sponsors', 'Register', 'Contact']
+export const navItems = ['About', 'Committee', 'Speakers', 'Schedule', 'Sponsors', 'Register', 'Contact']
 
 export const whyAttend = [
   'Personal Renewal',
@@ -234,6 +234,15 @@ export const faqs: [string, string][] = [
   ['Can my church sponsor me?', 'Yes. Local churches are encouraged to sponsor their pastor(s) to attend.'],
 ]
 
+export const committee: CommitteeMember[] = [
+  { name: 'Rev. Dr. Luke Odhiambo', title: 'Chairman', image: '/committee/Chairman.png' },
+  { name: 'Rev. Dr. Sammy Muthini', title: 'Vice Chairman', image: '/committee/Vice-Chairman.png' },
+  { name: 'Rev. Stanley Mutangili', title: 'Secretary', image: '/committee/Secretary.png' },
+  { name: 'Rev. John Katete', title: 'Treasurer', image: '/committee/Treasurer.png' },
+  { name: 'Rev. John Kitala', title: 'Member', image: '/committee/Kitala.png' },
+  { name: 'Pr. Benson Waema', title: 'Member', image: '/committee/Waema.png' },
+]
+
 export const mainSponsor: Sponsor = { name: 'Way of Truth Ministries', image: '/sponsors/main.png' }
 
 export const sponsors: Sponsor[] = [
@@ -241,6 +250,7 @@ export const sponsors: Sponsor[] = [
   { name: 'Chiromo Hospital', image: '/sponsors/Chiromohospitallogo.png' },
   { name: 'Kabarak University', image: '/sponsors/Kabarak_University_logo.png' },
   { name: 'Africa Inland Mission', image: '/sponsors/africainlandmission.png' },
+  { name: 'The International Leadership University', image: '/sponsors/ILULogo.png' },
   { name: 'BHB', image: '/sponsors/bhb-logo.jpg' },
   { name: 'Daily Bread', image: '/sponsors/dailybreadlogo.png' },
   { name: 'Kijabe Hospital', image: '/sponsors/kijabe.png' },

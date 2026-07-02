@@ -34,7 +34,7 @@ export default function Office() {
     <section id="office" className="bg-brand-dark px-5 py-20 text-white lg:px-8">
       <motion.div {...revealProps}>
         <SectionHeading
-          eyebrow="Church Leadership"
+          eyebrow="Presiding Bishop's Office"
           title="The office presiding over this year's conference."
           strokeWord="Office"
           light

@@ -1,3 +1,4 @@
+import { User } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { committee } from '../data'
 import { revealProps } from '../lib/motion'
@@ -8,13 +9,20 @@ const leadership = committee.filter((m) => m.title === 'Chairman' || m.title ===
 const rest = committee.filter((m) => m.title !== 'Chairman' && m.title !== 'Vice Chairman')
 
 function MemberCard({ member, large = false }: { member: CommitteeMember; large?: boolean }) {
+  const sizeClasses = `h-50 w-50 rounded-full shadow-lg ${large ? 'sm:h-58 sm:w-58 lg:h-64 lg:w-64' : ''}`
   return (
     <div className="flex flex-col items-center gap-4 text-center">
-      <img
-        src={member.image}
-        alt={member.name}
-        className={`h-50 w-50 rounded-full border-4 border-white/15 object-cover object-top shadow-lg ring-1 ring-white/10 ${large ? 'sm:h-58 sm:w-58 lg:h-64 lg:w-64' : ''}`}
-      />
+      {member.image ? (
+        <img
+          src={member.image}
+          alt={member.name}
+          className={`${sizeClasses} border-4 border-white/15 object-cover object-top ring-1 ring-white/10`}
+        />
+      ) : (
+        <div className={`${sizeClasses} grid place-items-center border-4 border-white/15 bg-white/10 ring-1 ring-white/10`}>
+          <User className="h-1/2 w-1/2 text-white/40" strokeWidth={1.5} />
+        </div>
+      )}
       <div>
         <h3 className={`font-extrabold text-white ${large ? 'text-xl' : 'text-base'}`}>{member.name}</h3>
         <span className="mt-2 inline-block rounded-full bg-brand-red px-3 py-1 text-xs uppercase tracking-[0.14em] text-white">
@@ -30,7 +38,7 @@ export default function Committee() {
     <section id="committee" className="bg-brand-dark px-5 py-20 text-white lg:px-8">
       <motion.div {...revealProps}>
         <SectionHeading
-          eyebrow="Organizing Committee"
+          eyebrow="Organising Committee"
           title="The team planning this year's conference."
           strokeWord="Committee"
           light

@@ -6,10 +6,17 @@ export type Speaker = {
   imagePosition?: string
 }
 
+export type ScheduleItem = {
+  time: string
+  activity: string
+  facilitator?: string
+}
+
 export type ScheduleDay = {
   day: string
   date: string
-  items: string[]
+  isoDate: string
+  items: ScheduleItem[]
 }
 
 export type Testimonial = {
@@ -32,7 +39,7 @@ export type Sponsor = {
 export type CommitteeMember = {
   name: string
   title: string
-  image: string
+  image?: string
 }
 
 export type OfficeMember = {

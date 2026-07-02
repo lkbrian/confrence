@@ -1,5 +1,5 @@
-import type { Speaker, ScheduleDay, Testimonial, Topic, Sponsor, CommitteeMember, OfficeMember } from './lib/types/data'
-export type { Speaker, ScheduleDay, Testimonial, Topic, Sponsor, CommitteeMember, OfficeMember }
+import type { Speaker, ScheduleDay, ScheduleItem, Testimonial, Topic, Sponsor, CommitteeMember, OfficeMember } from './lib/types/data'
+export type { Speaker, ScheduleDay, ScheduleItem, Testimonial, Topic, Sponsor, CommitteeMember, OfficeMember }
 
 export const navItems = ['About', 'Office', 'Committee', 'Speakers', 'Schedule', 'Sponsors', 'Register', 'Contact']
 
@@ -12,13 +12,6 @@ export const whyAttend = [
 ]
 
 export const speakers: Speaker[] = [
-  {
-    name: 'Rev. Abraham Mulwa',
-    ministry: 'Presiding Bishop, AIC Kenya',
-    bio: 'Leading the Africa Inland Church Kenya with a vision for spiritual renewal, unified leadership, and trans-generational impact across the nation.',
-    image: '/speakers/mulwa.png',
-    imagePosition: 'top',
-  },
   {
     name: 'Kevin Howard',
     ministry: 'Plenary Speaker',
@@ -73,40 +66,59 @@ export const speakers: Speaker[] = [
 export const schedule: ScheduleDay[] = [
   {
     day: 'Day 1',
-    date: 'Tuesday, 6th October',
+    date: 'Tuesday, 6th October 2026',
+    isoDate: '2026-10-06',
     items: [
-      'Registration & Hymn Moment',
-      'Host Welcome – Bishop Dr. Stephen Mairori',
-      'Devotion & Conference Opening – Rev. Abraham Mulwa',
-      'Pastors Conference Testimonials',
-      'Plenary 1: Mutual Trust and Vulnerability – Kevin Howard',
-      'Panel Interview',
-      'Plenary 2: Mental Health and Pastoral Wellness – Prof. Frank Njenga',
-      'Pastoral Charge 1: The Mosaic-Joshua Paradigm – Dr. Garry Dull',
+      { time: '0730 - 0830', activity: 'Registration', facilitator: 'Secretariat' },
+      { time: '0830 - 0845', activity: 'Hymn Moment', facilitator: 'Pr. Odu' },
+      { time: '0845 - 0850', activity: 'Host Welcome', facilitator: 'Bishop Dr. Stephen Mairori' },
+      { time: '0850 - 0915', activity: 'Devotion and Conference Opening', facilitator: 'Rev. Dr. Abraham Mulwa (Presiding Bishop, AIC Kenya)' },
+      { time: '0915 - 0930', activity: 'Pastors Conference Testimonial', facilitator: '3 Pastors' },
+      { time: '0930 - 1030', activity: 'Plenary 1: Mutual Trust and Vulnerability', facilitator: 'Kevin Howard' },
+      { time: '1030 - 1115', activity: 'Morning Tea Break', facilitator: 'Hospitality / Secretariat' },
+      { time: '1115 - 1130', activity: 'Hymn Moment / Partners Ads', facilitator: 'Pr. Odu / Media' },
+      { time: '1130 - 1230', activity: 'Panel Interview' },
+      { time: '1230 - 1300', activity: 'Plenary 2: Mental Health and Pastoral Wellness', facilitator: 'Prof. Frank Njenga' },
+      { time: '1300 - 1400', activity: 'Lunch', facilitator: 'Hospitality / Secretariat' },
+      { time: '1400 - 1415', activity: 'Hymn Moment / Partners Ads', facilitator: 'Pr. Odu / Media' },
+      { time: '1415 - 1545', activity: 'Pastoral Charge 1: The Mosaic-Joshua Paradigm', facilitator: 'Dr. Garry Dull' },
+      { time: '1545 - 1600', activity: 'Conclusions / Announcement / Closing', facilitator: 'Organizing Committee' },
     ],
   },
   {
     day: 'Day 2',
-    date: 'Wednesday, 7th October',
+    date: 'Wednesday, 7th October 2026',
+    isoDate: '2026-10-07',
     items: [
-      'Registration & Hymn Moment',
-      'Devotions – Prof. Jonathan Mwania, VC Scott Christian University',
-      'Plenary 3: Authority vs. Collaboration – Daniel Woodring',
-      'Plenary 4: Clashing Ministry Philosophies – Bill Ndindi',
-      'Break Away Sessions',
-      'Pastoral Charge 2: Pauline Mentorship Models – Bishop Kipsoi',
+      { time: '0800 - 0830', activity: 'Registration', facilitator: 'Secretariat' },
+      { time: '0830 - 0845', activity: 'Hymn Moment', facilitator: 'Pr. Odu' },
+      { time: '0845 - 0900', activity: 'Devotions', facilitator: 'Prof. Jonatham Mwania (VC, Scott Christian University)' },
+      { time: '0900 - 1000', activity: 'Plenary 3: Authority vs. Collaboration', facilitator: 'Daniel Woodring' },
+      { time: '1000 - 1045', activity: 'Morning Tea Break', facilitator: 'Hospitality / Secretariat' },
+      { time: '1045 - 1145', activity: 'Plenary 4: Clashing Ministry Philosophies', facilitator: 'Bill Ndindi' },
+      { time: '1145 - 1200', activity: 'Hymn Moment / Partners Ads', facilitator: 'Pr. Odu / Media' },
+      { time: '1200 - 1300', activity: 'Break Away Session' },
+      { time: '1300 - 1400', activity: 'Lunch', facilitator: 'Hospitality / Secretariat' },
+      { time: '1400 - 1415', activity: 'Hymn Moment / Partners Ads', facilitator: 'Pr. Odu / Media' },
+      { time: '1415 - 1545', activity: 'Pastoral Charge 2: Pauline Mentorship Models', facilitator: 'Bishop Kipsoi' },
+      { time: '1545 - 1600', activity: 'Conclusions and Announcement', facilitator: 'Organizing Committee' },
     ],
   },
   {
     day: 'Day 3',
-    date: 'Thursday, 8th October',
+    date: 'Thursday, 8th October 2026',
+    isoDate: '2026-10-08',
     items: [
-      'Registration & Hymn Moment',
-      'Devotions – Prof. Tim Kiruhi, VC International Leadership University',
-      'Plenary 5: Conflict & Culture – Navigating Friction Constructively – Kevin Howard',
-      'Plenary 6: Reverse Mentorship in Ministry – Daniel Woodring',
-      'Pastoral Charge 3: The Elijah-Elisha Succession – Dr. Garry Dull',
-      'Conference Closing, Resolutions & Certification – Rev. Abraham Mulwa',
+      { time: '0800 - 0830', activity: 'Registration', facilitator: 'Secretariat' },
+      { time: '0830 - 0845', activity: 'Hymn Moment / Partners Ads', facilitator: 'Pr. Odu / Media' },
+      { time: '0845 - 0900', activity: 'Devotions', facilitator: 'Prof. Tim Kiruhi (VC, International Leadership University)' },
+      { time: '0900 - 1000', activity: 'Plenary 5: Conflict & Culture – Navigating Friction Constructively', facilitator: 'Kevin Howard' },
+      { time: '1000 - 1045', activity: 'Morning Tea Break', facilitator: 'Hospitality / Secretariat' },
+      { time: '1045 - 1145', activity: 'Plenary 6: Reverse Mentorship in Ministry', facilitator: 'Daniel Woodring' },
+      { time: '1145 - 1150', activity: 'Hymn Moment', facilitator: 'Pr. Odu' },
+      { time: '1150 - 1300', activity: 'Pastoral Charge 3: The Elijah-Elisha Succession', facilitator: 'Dr. Garry Dull' },
+      { time: '1300 - 1330', activity: 'Conference Closing / Resolutions / Certification', facilitator: 'Organizing Committee / Rev. Dr. Abraham Mulwa' },
+      { time: '1330 - 1400', activity: 'Lunch / Departure', facilitator: 'Hospitality / Secretariat' },
     ],
   },
 ]
@@ -235,7 +247,7 @@ export const faqs: [string, string][] = [
 ]
 
 export const office: OfficeMember[] = [
-  { name: 'Rev. Abraham Mulwa', title: 'Presiding Bishop', image: '/speakers/mulwa.png' },
+  { name: 'Rev. Abraham Mulwa', title: 'Presiding Bishop', image: '/office/mulwa.png' },
   { name: 'Bishop Paul Kirui', title: 'Deputy Presiding Bishop', image: '/office/kirui.png' },
   { name: "Rev. Dr. Simeon Adera Ng'uono", title: 'Administrative Secretary', image: '/office/simon.jpg' },
 ]
@@ -244,10 +256,11 @@ export const committee: CommitteeMember[] = [
   { name: 'Rev. Dr. Luke Odhiambo', title: 'Chairman', image: '/committee/Chairman.png' },
   { name: 'Rev. Dr. Sammy Muthini', title: 'Vice Chairman', image: '/committee/Vice-Chairman.png' },
   { name: 'Rev. Stanley Mutangili', title: 'Secretary', image: '/committee/Secretary.png' },
-  { name: 'Rev. John Katete', title: 'Treasurer', image: '/committee/Treasurer.png' },
+  { name: 'Mr. Paul Mugo', title: 'Finance' },
   { name: 'Rev. John Kitala', title: 'Member', image: '/committee/Kitala.png' },
   { name: 'Rev. Raymond Kyengo', title: 'Member', image: '/committee/raymond.jpeg' },
   { name: 'Pr. Benson Waema', title: 'Member', image: '/committee/Waema.png' },
+  { name: 'Rev. John Katete', title: 'Member', image: '/committee/Treasurer.png' },
 ]
 
 export const mainSponsor: Sponsor = { name: 'Way of Truth Ministries', image: '/sponsors/main.png' }

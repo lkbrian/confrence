@@ -106,6 +106,7 @@ export default function SpeakerCarousel() {
                 src={s.image}
                 alt={s.name}
                 className="h-full w-full object-cover"
+                style={{ objectPosition: s.imagePosition ?? 'center' }}
                 draggable={false}
               />
               <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/10 to-transparent" />

@@ -10,7 +10,7 @@ import Schedule from './components/Schedule'
 import Speakers from './components/Speakers'
 import Sponsors from './components/Sponsors'
 import Testimonials from './components/Testimonials'
-import Theme from './components/Theme'
+import Topics from './components/Topics'
 import Tracks from './components/Tracks'
 import Venue from './components/Venue'
 import WhyAttend from './components/WhyAttend'
@@ -21,10 +21,10 @@ function App() {
       <Navbar />
       <Hero />
       <About />
-      <Theme />
       <WhyAttend />
       <Speakers />
       <Schedule />
+      <Topics />
       <Tracks />
       <Venue />
       <Register />

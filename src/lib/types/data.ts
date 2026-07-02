@@ -3,6 +3,7 @@ export type Speaker = {
   ministry: string
   bio: string
   image: string
+  imagePosition?: string
 }
 
 export type ScheduleDay = {
@@ -14,4 +15,16 @@ export type ScheduleDay = {
 export type Testimonial = {
   quote: string
   name: string
+}
+
+export type Topic = {
+  code: string
+  topic: string
+  brief: string
+  speaker: string
+}
+
+export type Sponsor = {
+  name: string
+  image: string
 }

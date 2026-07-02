@@ -55,6 +55,10 @@ h6 {
   font-family: "League Spartan", sans-serif;
 }
 
+.font-league {
+  font-family: "League Spartan", sans-serif;
+}
+
 .card {
   transform-origin: center center;
   transition: transform 120ms linear;

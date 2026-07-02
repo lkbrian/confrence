@@ -25,7 +25,7 @@ export default function Footer() {
             Register
           </a>
         </div>
-      </div>
+      </motion.div>
     </footer>
   )
 }

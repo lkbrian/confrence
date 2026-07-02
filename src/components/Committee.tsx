@@ -13,7 +13,7 @@ function MemberCard({ member, large = false }: { member: CommitteeMember; large?
       <img
         src={member.image}
         alt={member.name}
-        className={`h-50 w-50 rounded-full border-4 border-white/15 object-cover object-top shadow-lg ring-1 ring-white/10 ${large ? 'sm:h-56 sm:w-56 lg:h-64 lg:w-64' : ''}`}
+        className={`h-50 w-50 rounded-full border-4 border-white/15 object-cover object-top shadow-lg ring-1 ring-white/10 ${large ? 'sm:h-58 sm:w-58 lg:h-64 lg:w-64' : ''}`}
       />
       <div>
         <h3 className={`font-extrabold text-white ${large ? 'text-xl' : 'text-base'}`}>{member.name}</h3>
@@ -29,26 +29,26 @@ export default function Committee() {
   return (
     <section id="committee" className="bg-brand-dark px-5 py-20 text-white lg:px-8">
       <motion.div {...revealProps}>
-      <SectionHeading
-        eyebrow="Organizing Committee"
-        title="The team planning this year's conference."
-        strokeWord="Committee"
-        light
-      />
-      <div className="mx-auto max-w-5xl">
-        <div className="mx-auto mb-14 grid max-w-2xl gap-10 sm:grid-cols-2">
-          {leadership.map((member) => (
-            <MemberCard key={member.name} member={member} large />
-          ))}
-        </div>
-        <div className="relative mx-auto max-w-4xl lg:max-w-6xl before:absolute before:-top-7 before:left-1/2 before:h-px before:w-16 before:-translate-x-1/2 before:bg-white/15">
-          <div className="grid gap-6 lg:gap-10 sm:grid-cols-2 lg:grid-cols-5">
-            {rest.map((member) => (
-              <MemberCard key={member.name} member={member} />
+        <SectionHeading
+          eyebrow="Organizing Committee"
+          title="The team planning this year's conference."
+          strokeWord="Committee"
+          light
+        />
+        <div className="mx-auto max-w-5xl">
+          <div className="mx-auto mb-14 grid max-w-2xl gap-10 sm:grid-cols-2">
+            {leadership.map((member) => (
+              <MemberCard key={member.name} member={member} large />
             ))}
           </div>
+          <div className="relative mx-auto max-w-4xl lg:max-w-6xl before:absolute before:-top-7 before:left-1/2 before:h-px before:w-16 before:-translate-x-1/2 before:bg-white/15">
+            <div className="grid gap-6 lg:gap-10 sm:grid-cols-2 lg:grid-cols-3">
+              {rest.map((member) => (
+                <MemberCard key={member.name} member={member} />
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
       </motion.div>
     </section>
   )

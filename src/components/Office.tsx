@@ -12,7 +12,7 @@ function MemberCard({ member }: { member: OfficeMember }) {
         <img
           src={member.image}
           alt={member.name}
-          className="h-60 w-60 rounded-full border-4 bg-[#F8DEC5] border-brand-dark object-cover object-top shadow-lg ring-1 ring-brand-dark"
+          className="h-64 w-64 rounded-full border-4 bg-[#F8DEC5] border-brand-dark object-cover object-top shadow-lg ring-1 ring-brand-dark"
         />
       ) : (
         <div className="grid h-50 w-50 place-items-center rounded-full border-4 border-white/15 bg-white/10 shadow-lg ring-1 ring-white/10">
@@ -33,17 +33,17 @@ export default function Office() {
   return (
     <section id="office" className="bg-brand-dark px-5 py-20 text-white lg:px-8">
       <motion.div {...revealProps}>
-      <SectionHeading
-        eyebrow="Church Leadership"
-        title="The office presiding over this year's conference."
-        strokeWord="Office"
-        light
-      />
-      <div className="mx-auto grid max-w-4xl gap-10 sm:grid-cols-3">
-        {office.map((member) => (
-          <MemberCard key={member.title} member={member} />
-        ))}
-      </div>
+        <SectionHeading
+          eyebrow="Church Leadership"
+          title="The office presiding over this year's conference."
+          strokeWord="Office"
+          light
+        />
+        <div className="mx-auto grid max-w-4xl gap-10 sm:grid-cols-3">
+          {office.map((member) => (
+            <MemberCard key={member.title} member={member} />
+          ))}
+        </div>
       </motion.div>
     </section>
   )

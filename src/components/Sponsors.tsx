@@ -16,7 +16,7 @@ export default function Sponsors() {
   )
 
   return (
-    <section className="overflow-hidden bg-white py-20">
+    <section id="sponsors" className="overflow-hidden bg-white py-20">
       <div className="px-5 lg:px-8">
         <SectionHeading
           eyebrow="Sponsors & Partners"

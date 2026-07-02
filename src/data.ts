@@ -1,7 +1,7 @@
 import type { Speaker, ScheduleDay, Testimonial, Topic, Sponsor } from './lib/types/data'
 export type { Speaker, ScheduleDay, Testimonial, Topic, Sponsor }
 
-export const navItems = ['About', 'Speakers', 'Schedule', 'Register', 'Contact']
+export const navItems = ['About', 'Speakers', 'Schedule', 'Sponsors', 'Register', 'Contact']
 
 export const whyAttend = [
   'Personal Renewal',

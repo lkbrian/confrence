@@ -1,6 +1,8 @@
 import { ArrowRight, CheckCircle2, Loader2 } from 'lucide-react'
+import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { submitRegistration } from '../lib/supabase'
+import { revealProps } from '../lib/motion'
 import SectionHeading from './SectionHeading'
 import type { RegistrationStatus } from '../lib/types/ui'
 
@@ -33,7 +35,7 @@ export default function Register() {
   }
 
   return (
-    <section id="register" className="bg-brand-dark px-5 py-20 text-white lg:px-8">
+    <motion.section id="register" className="bg-brand-dark px-5 py-20 text-white lg:px-8" {...revealProps}>
       <SectionHeading eyebrow="Registration" title="Register for the Conference" light strokeWord="Register" />
       <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-[1fr_1.4fr]">
 
@@ -157,6 +159,6 @@ export default function Register() {
           )}
         </form>
       </div>
-    </section>
+    </motion.section>
   )
 }

@@ -1,9 +1,11 @@
+import { motion } from 'framer-motion'
 import { speakers } from '../data'
+import { revealProps } from '../lib/motion'
 import SectionHeading from './SectionHeading'
 
 export default function Speakers() {
   return (
-    <section id="speakers" className="bg-brand-dark px-5 py-20 text-white lg:px-8">
+    <motion.section id="speakers" className="bg-brand-dark px-5 py-20 text-white lg:px-8" {...revealProps}>
       <SectionHeading eyebrow="Featured Speakers" title="Experienced voices for pastoral formation." light strokeWord="Speakers" />
       <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-3">
         {speakers.map((speaker) => (
@@ -22,6 +24,6 @@ export default function Speakers() {
           </article>
         ))}
       </div>
-    </section>
+    </motion.section>
   )
 }

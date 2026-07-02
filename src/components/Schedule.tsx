@@ -1,5 +1,7 @@
 import { Award, BookOpen, Coffee, Mic2, Music2, Users2 } from 'lucide-react'
+import { motion } from 'framer-motion'
 import { schedule } from '../data'
+import { revealProps } from '../lib/motion'
 import SectionHeading from './SectionHeading'
 
 function iconFor(item: string) {
@@ -18,7 +20,7 @@ function parseItem(item: string) {
 
 export default function Schedule() {
   return (
-    <section id="schedule" className="bg-white px-5 py-10 pt-20 lg:px-8">
+    <motion.section id="schedule" className="bg-white px-5 py-10 pt-20 lg:px-8" {...revealProps}>
       <SectionHeading eyebrow="Conference Schedule" title="Three days of worship, teaching, workshops, and prayer." strokeWord="Schedule" />
       <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-3">
         {schedule.map((day, dayIndex) => (
@@ -57,6 +59,6 @@ export default function Schedule() {
           </article>
         ))}
       </div>
-    </section>
+    </motion.section>
   )
 }

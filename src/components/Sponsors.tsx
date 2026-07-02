@@ -2,7 +2,9 @@ import { useState } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import AutoScroll from 'embla-carousel-auto-scroll'
 import { LayoutGrid, PlayCircle } from 'lucide-react'
+import { motion } from 'framer-motion'
 import { mainSponsor, sponsors } from '../data'
+import { revealProps } from '../lib/motion'
 import SectionHeading from './SectionHeading'
 
 // Triple the list so there are always enough slides for a seamless loop
@@ -16,7 +18,7 @@ export default function Sponsors() {
   )
 
   return (
-    <section id="sponsors" className="overflow-hidden bg-white py-20">
+    <motion.section id="sponsors" className="overflow-hidden bg-white py-20" {...revealProps}>
       <div className="px-5 lg:px-8">
         <SectionHeading
           eyebrow="Sponsors & Partners"
@@ -82,6 +84,6 @@ export default function Sponsors() {
           </div>
         </div>
       )}
-    </section>
+    </motion.section>
   )
 }

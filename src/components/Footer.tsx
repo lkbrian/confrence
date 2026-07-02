@@ -1,9 +1,11 @@
 import { MessageCircle, Users } from 'lucide-react'
+import { motion } from 'framer-motion'
 import { navItems } from '../data'
+import { revealProps } from '../lib/motion'
 
 export default function Footer() {
   return (
-    <footer className="bg-brand-dark px-5 py-10 text-white lg:px-8">
+    <motion.footer className="bg-brand-dark px-5 py-10 text-white lg:px-8" {...revealProps}>
       <div className="mx-auto flex max-w-7xl flex-col gap-6 md:flex-row md:items-center md:justify-between">
         <div>
           <p className="text-xl font-extrabold">Shepherds Advance Conference 2026</p>
@@ -24,6 +26,6 @@ export default function Footer() {
           </a>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   )
 }

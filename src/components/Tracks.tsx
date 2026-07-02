@@ -1,4 +1,6 @@
 import { Landmark, Monitor, Sunset, Users } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { revealProps } from '../lib/motion'
 import SectionHeading from './SectionHeading'
 
 const topics = [
@@ -10,7 +12,7 @@ const topics = [
 
 export default function Tracks() {
   return (
-    <section className="bg-white px-5 py-20 lg:px-8">
+    <motion.section className="bg-white px-5 py-20 lg:px-8" {...revealProps}>
       <SectionHeading eyebrow="Conference Tracks" title="Breakaway sessions for every area of pastoral life." strokeWord="Tracks" />
       <div className="mx-auto grid max-w-7xl gap-4 sm:grid-cols-2">
         {topics.map(({ icon: Icon, label, facilitator }) => (
@@ -23,6 +25,6 @@ export default function Tracks() {
           </div>
         ))}
       </div>
-    </section>
+    </motion.section>
   )
 }

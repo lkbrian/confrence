@@ -3,6 +3,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useCallback, useEffect, useRef } from 'react'
 import { testimonials } from '../data'
+import { revealProps } from '../lib/motion'
 import SectionHeading from './SectionHeading'
 
 const TWEEN_FACTOR = 3
@@ -51,7 +52,7 @@ export default function Testimonials() {
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi])
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden py-24 text-white">
+    <motion.section ref={sectionRef} className="relative overflow-hidden py-24 text-white" {...revealProps}>
 
       {/* Parallax background — 130% tall so it never shows a gap while moving */}
       <motion.img
@@ -109,6 +110,6 @@ export default function Testimonials() {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   )
 }

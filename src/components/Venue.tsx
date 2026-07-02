@@ -1,8 +1,10 @@
+import { motion } from 'framer-motion'
+import { revealProps } from '../lib/motion'
 import SectionHeading from './SectionHeading'
 
 export default function Venue() {
   return (
-    <section className="px-5 py-20 lg:px-8">
+    <motion.section className="px-5 py-20 lg:px-8" {...revealProps}>
       <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr]">
         <div>
           <SectionHeading eyebrow="Venue" title="Africa Inland Church Milimani, Nairobi" align="start" strokeWord="Venue" />
@@ -19,6 +21,6 @@ export default function Venue() {
           />
         </div>
       </div>
-    </section>
+    </motion.section>
   )
 }

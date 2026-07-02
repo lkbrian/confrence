@@ -1,4 +1,6 @@
+import { motion } from 'framer-motion'
 import { committee } from '../data'
+import { revealProps } from '../lib/motion'
 import SectionHeading from './SectionHeading'
 import type { CommitteeMember } from '../data'
 
@@ -11,7 +13,7 @@ function MemberCard({ member, large = false }: { member: CommitteeMember; large?
       <img
         src={member.image}
         alt={member.name}
-        className={`${large ? 'h-50 w-50' : 'h-40 w-40'} rounded-full border-4 border-white/15 object-cover object-top shadow-lg ring-1 ring-white/10`}
+        className={`h-50 w-50 rounded-full border-4 border-white/15 object-cover object-top shadow-lg ring-1 ring-white/10 ${large ? 'sm:h-56 sm:w-56 lg:h-64 lg:w-64' : ''}`}
       />
       <div>
         <h3 className={`font-extrabold text-white ${large ? 'text-xl' : 'text-base'}`}>{member.name}</h3>
@@ -25,7 +27,7 @@ function MemberCard({ member, large = false }: { member: CommitteeMember; large?
 
 export default function Committee() {
   return (
-    <section id="committee" className="bg-brand-dark px-5 py-20 text-white lg:px-8">
+    <motion.section id="committee" className="bg-brand-dark px-5 py-20 text-white lg:px-8" {...revealProps}>
       <SectionHeading
         eyebrow="Organizing Committee"
         title="The team planning this year's conference."
@@ -46,6 +48,6 @@ export default function Committee() {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   )
 }

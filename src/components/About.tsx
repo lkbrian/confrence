@@ -1,4 +1,6 @@
 import { Compass, Quote, Sparkles, Users } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { revealProps } from '../lib/motion'
 import SectionHeading from './SectionHeading'
 
 const cards = [
@@ -9,7 +11,7 @@ const cards = [
 
 export default function About() {
   return (
-    <section id="about" className="px-5 py-20 lg:px-8 bg-white w-full">
+    <motion.section id="about" className="px-5 py-20 lg:px-8 bg-white w-full" {...revealProps}>
       <div className="container mx-auto">
         <SectionHeading
           eyebrow="About the Conference"
@@ -83,6 +85,6 @@ export default function About() {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   )
 }

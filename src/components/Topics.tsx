@@ -1,4 +1,6 @@
+import { motion } from 'framer-motion'
 import { plenaryTopics, pastoralChallengeTopics } from '../data'
+import { revealProps } from '../lib/motion'
 import type { Topic } from '../lib/types/data'
 import SectionHeading from './SectionHeading'
 
@@ -19,7 +21,7 @@ function TopicCard({ topic }: { topic: Topic }) {
 
 export default function Topics() {
   return (
-    <section id="topics" className="bg-brand-cream px-5 py-20 lg:px-8">
+    <motion.section id="topics" className="bg-brand-cream px-5 py-20 lg:px-8" {...revealProps}>
       <SectionHeading
         eyebrow="Trans-Generational Mentorship"
         title="Session topics shaping the conversation."
@@ -41,6 +43,6 @@ export default function Topics() {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   )
 }

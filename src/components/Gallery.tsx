@@ -5,7 +5,8 @@ import SectionHeading from './SectionHeading'
 
 export default function Gallery() {
   return (
-    <motion.section className="bg-white px-5 py-20 lg:px-8" {...revealProps}>
+    <section className="bg-white px-5 py-20 lg:px-8">
+      <motion.div {...revealProps}>
       <SectionHeading align='start' eyebrow="Gallery" title="Photos from previous conferences and event highlights." strokeWord="Gallery" />
       <div className="mx-auto columns-2 gap-4 md:columns-3 lg:columns-4">
         {gallery.map(({ src, tall }, index) => (
@@ -18,6 +19,7 @@ export default function Gallery() {
           </div>
         ))}
       </div>
-    </motion.section>
+      </motion.div>
+    </section>
   )
 }

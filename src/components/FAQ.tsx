@@ -5,7 +5,8 @@ import SectionHeading from './SectionHeading'
 
 export default function FAQ() {
   return (
-    <motion.section className="bg-brand-dark px-5 py-20 text-white lg:px-8" {...revealProps}>
+    <section className="bg-brand-dark px-5 py-20 text-white lg:px-8">
+      <motion.div {...revealProps}>
       <SectionHeading eyebrow="FAQ" title="Common registration and attendance questions." light strokeWord="FAQ" />
       <div className="mx-auto grid max-w-5xl gap-4">
         {faqs.map(([question, answer]) => (
@@ -15,6 +16,7 @@ export default function FAQ() {
           </details>
         ))}
       </div>
-    </motion.section>
+      </motion.div>
+    </section>
   )
 }

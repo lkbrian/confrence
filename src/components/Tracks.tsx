@@ -12,7 +12,8 @@ const topics = [
 
 export default function Tracks() {
   return (
-    <motion.section className="bg-white px-5 py-20 lg:px-8" {...revealProps}>
+    <section className="bg-white px-5 py-20 lg:px-8">
+      <motion.div {...revealProps}>
       <SectionHeading eyebrow="Conference Tracks" title="Breakaway sessions for every area of pastoral life." strokeWord="Tracks" />
       <div className="mx-auto grid max-w-7xl gap-4 sm:grid-cols-2">
         {topics.map(({ icon: Icon, label, facilitator }) => (
@@ -25,6 +26,7 @@ export default function Tracks() {
           </div>
         ))}
       </div>
-    </motion.section>
+      </motion.div>
+    </section>
   )
 }

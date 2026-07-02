@@ -52,7 +52,7 @@ export default function Testimonials() {
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi])
 
   return (
-    <motion.section ref={sectionRef} className="relative overflow-hidden py-24 text-white" {...revealProps}>
+    <section ref={sectionRef} className="relative overflow-hidden py-24 text-white">
 
       {/* Parallax background — 130% tall so it never shows a gap while moving */}
       <motion.img
@@ -65,7 +65,7 @@ export default function Testimonials() {
 
       <div className="absolute inset-0 bg-[#042a35CC]" />
 
-      <div className="relative px-5 lg:px-8">
+      <motion.div className="relative px-5 lg:px-8" {...revealProps}>
         <SectionHeading
           eyebrow="Success Stories"
           title="What pastors say after attending."
@@ -109,7 +109,7 @@ export default function Testimonials() {
             </div>
           </div>
         </div>
-      </div>
-    </motion.section>
+      </motion.div>
+    </section>
   )
 }

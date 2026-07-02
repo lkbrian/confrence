@@ -6,6 +6,7 @@ import Footer from './components/Footer'
 import Gallery from './components/Gallery'
 import Hero from './components/Hero'
 import Navbar from './components/Navbar'
+import Office from './components/Office'
 import Register from './components/Register'
 import Schedule from './components/Schedule'
 import Speakers from './components/Speakers'
@@ -21,9 +22,10 @@ function App() {
       <Navbar />
       <Hero />
       <About />
+      <Office />
       <Committee />
-      <Schedule />
       <Speakers />
+      <Schedule />
       <Topics />
       <Tracks />
       <Venue />

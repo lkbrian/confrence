@@ -13,7 +13,8 @@ const items = [
 
 export default function WhyAttend() {
   return (
-    <motion.section className="px-5 py-20 lg:px-8 bg-white" {...revealProps}>
+    <section className="px-5 py-20 lg:px-8 bg-white">
+      <motion.div {...revealProps}>
       <SectionHeading eyebrow="Why Attend" title="Built around the work pastors actually carry." strokeWord="Why" />
       <div className="mx-auto grid max-w-7xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {items.map(({ icon: Icon, label }) => (
@@ -23,6 +24,7 @@ export default function WhyAttend() {
           </div>
         ))}
       </div>
-    </motion.section>
+      </motion.div>
+    </section>
   )
 }

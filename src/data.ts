@@ -1,7 +1,7 @@
-import type { Speaker, ScheduleDay, Testimonial, Topic, Sponsor, CommitteeMember } from './lib/types/data'
-export type { Speaker, ScheduleDay, Testimonial, Topic, Sponsor, CommitteeMember }
+import type { Speaker, ScheduleDay, Testimonial, Topic, Sponsor, CommitteeMember, OfficeMember } from './lib/types/data'
+export type { Speaker, ScheduleDay, Testimonial, Topic, Sponsor, CommitteeMember, OfficeMember }
 
-export const navItems = ['About', 'Committee', 'Speakers', 'Schedule', 'Sponsors', 'Register', 'Contact']
+export const navItems = ['About', 'Office', 'Committee', 'Speakers', 'Schedule', 'Sponsors', 'Register', 'Contact']
 
 export const whyAttend = [
   'Personal Renewal',
@@ -234,12 +234,19 @@ export const faqs: [string, string][] = [
   ['Can my church sponsor me?', 'Yes. Local churches are encouraged to sponsor their pastor(s) to attend.'],
 ]
 
+export const office: OfficeMember[] = [
+  { name: 'Rev. Abraham Mulwa', title: 'Presiding Bishop', image: '/speakers/mulwa.png' },
+  { name: 'Bishop Paul Kirui', title: 'Deputy Presiding Bishop', image: '/office/kirui.png' },
+  { name: "Rev. Dr. Simeon Adera Ng'uono", title: 'Administrative Secretary', image: '/office/simon.jpg' },
+]
+
 export const committee: CommitteeMember[] = [
   { name: 'Rev. Dr. Luke Odhiambo', title: 'Chairman', image: '/committee/Chairman.png' },
   { name: 'Rev. Dr. Sammy Muthini', title: 'Vice Chairman', image: '/committee/Vice-Chairman.png' },
   { name: 'Rev. Stanley Mutangili', title: 'Secretary', image: '/committee/Secretary.png' },
   { name: 'Rev. John Katete', title: 'Treasurer', image: '/committee/Treasurer.png' },
   { name: 'Rev. John Kitala', title: 'Member', image: '/committee/Kitala.png' },
+  { name: 'Rev. Raymond Kyengo', title: 'Member', image: '/committee/raymond.jpeg' },
   { name: 'Pr. Benson Waema', title: 'Member', image: '/committee/Waema.png' },
 ]
 

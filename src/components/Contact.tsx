@@ -4,7 +4,7 @@ import { revealProps } from '../lib/motion'
 import SectionHeading from './SectionHeading'
 
 const contactItems = [
-  { Icon: Mail, label: 'Email', value: 'info@pastorssummit.org' },
+  { Icon: Mail, label: 'Email', value: 'Conference@aickenya.org' },
   { Icon: Phone, label: 'Phone', value: '+254 700 000 000' },
   { Icon: MessageCircle, label: 'WhatsApp', value: '+254 711 000 000' },
   { Icon: Users, label: 'Social', value: '@pastorssummit' },
@@ -12,7 +12,8 @@ const contactItems = [
 
 export default function Contact() {
   return (
-    <motion.section id="contact" className="px-5 py-20 lg:px-8" {...revealProps}>
+    <section id="contact" className="px-5 py-20 lg:px-8">
+      <motion.div {...revealProps}>
       <SectionHeading eyebrow="Contact" title="Talk to the conference team." strokeWord="Contact" />
       <div className="mx-auto grid max-w-5xl gap-4 md:grid-cols-2 lg:grid-cols-4">
         {contactItems.map(({ Icon, label, value }) => (
@@ -23,6 +24,7 @@ export default function Contact() {
           </div>
         ))}
       </div>
-    </motion.section>
+      </motion.div>
+    </section>
   )
 }

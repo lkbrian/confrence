@@ -4,8 +4,8 @@ import SectionHeading from './SectionHeading'
 
 export default function Venue() {
   return (
-    <motion.section className="px-5 py-20 lg:px-8" {...revealProps}>
-      <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+    <section className="px-5 py-20 lg:px-8">
+      <motion.div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr]" {...revealProps}>
         <div>
           <SectionHeading eyebrow="Venue" title="Africa Inland Church Milimani, Nairobi" align="start" strokeWord="Venue" />
           <p className="mt-4 text-lg leading-8 text-stone-600">
@@ -20,7 +20,7 @@ export default function Venue() {
             loading="lazy"
           />
         </div>
-      </div>
-    </motion.section>
+      </motion.div>
+    </section>
   )
 }

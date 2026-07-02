@@ -34,3 +34,9 @@ export type CommitteeMember = {
   title: string
   image: string
 }
+
+export type OfficeMember = {
+  name: string
+  title: string
+  image?: string
+}

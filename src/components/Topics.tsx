@@ -21,7 +21,8 @@ function TopicCard({ topic }: { topic: Topic }) {
 
 export default function Topics() {
   return (
-    <motion.section id="topics" className="bg-brand-cream px-5 py-20 lg:px-8" {...revealProps}>
+    <section id="topics" className="bg-brand-cream px-5 py-20 lg:px-8">
+      <motion.div {...revealProps}>
       <SectionHeading
         eyebrow="Trans-Generational Mentorship"
         title="Session topics shaping the conversation."
@@ -43,6 +44,7 @@ export default function Topics() {
           ))}
         </div>
       </div>
-    </motion.section>
+      </motion.div>
+    </section>
   )
 }

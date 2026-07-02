@@ -18,7 +18,8 @@ export default function Sponsors() {
   )
 
   return (
-    <motion.section id="sponsors" className="overflow-hidden bg-white py-20" {...revealProps}>
+    <section id="sponsors" className="overflow-hidden bg-white py-20">
+      <motion.div {...revealProps}>
       <div className="px-5 lg:px-8">
         <SectionHeading
           eyebrow="Sponsors & Partners"
@@ -84,6 +85,7 @@ export default function Sponsors() {
           </div>
         </div>
       )}
-    </motion.section>
+      </motion.div>
+    </section>
   )
 }

@@ -27,7 +27,8 @@ function MemberCard({ member, large = false }: { member: CommitteeMember; large?
 
 export default function Committee() {
   return (
-    <motion.section id="committee" className="bg-brand-dark px-5 py-20 text-white lg:px-8" {...revealProps}>
+    <section id="committee" className="bg-brand-dark px-5 py-20 text-white lg:px-8">
+      <motion.div {...revealProps}>
       <SectionHeading
         eyebrow="Organizing Committee"
         title="The team planning this year's conference."
@@ -40,14 +41,15 @@ export default function Committee() {
             <MemberCard key={member.name} member={member} large />
           ))}
         </div>
-        <div className="relative mx-auto max-w-4xl before:absolute before:-top-7 before:left-1/2 before:h-px before:w-16 before:-translate-x-1/2 before:bg-white/15">
-          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="relative mx-auto max-w-4xl lg:max-w-6xl before:absolute before:-top-7 before:left-1/2 before:h-px before:w-16 before:-translate-x-1/2 before:bg-white/15">
+          <div className="grid gap-6 lg:gap-10 sm:grid-cols-2 lg:grid-cols-5">
             {rest.map((member) => (
               <MemberCard key={member.name} member={member} />
             ))}
           </div>
         </div>
       </div>
-    </motion.section>
+      </motion.div>
+    </section>
   )
 }

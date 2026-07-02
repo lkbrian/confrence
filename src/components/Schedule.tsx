@@ -20,7 +20,8 @@ function parseItem(item: string) {
 
 export default function Schedule() {
   return (
-    <motion.section id="schedule" className="bg-white px-5 py-10 pt-20 lg:px-8" {...revealProps}>
+    <section id="schedule" className="bg-white px-5 py-10 pt-20 lg:px-8">
+      <motion.div {...revealProps}>
       <SectionHeading eyebrow="Conference Schedule" title="Three days of worship, teaching, workshops, and prayer." strokeWord="Schedule" />
       <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-3">
         {schedule.map((day, dayIndex) => (
@@ -59,6 +60,7 @@ export default function Schedule() {
           </article>
         ))}
       </div>
-    </motion.section>
+      </motion.div>
+    </section>
   )
 }

@@ -5,8 +5,8 @@ import { revealProps } from '../lib/motion'
 
 export default function Footer() {
   return (
-    <motion.footer className="bg-brand-dark px-5 py-10 text-white lg:px-8" {...revealProps}>
-      <div className="mx-auto flex max-w-7xl flex-col gap-6 md:flex-row md:items-center md:justify-between">
+    <footer className="bg-brand-dark px-5 py-10 text-white lg:px-8">
+      <motion.div className="mx-auto flex max-w-7xl flex-col gap-6 md:flex-row md:items-center md:justify-between" {...revealProps}>
         <div>
           <p className="text-xl font-extrabold">Shepherds Advance Conference 2026</p>
           <p className="mt-2 text-white/60">Copyright 2026. All rights reserved.</p>
@@ -26,6 +26,6 @@ export default function Footer() {
           </a>
         </div>
       </div>
-    </motion.footer>
+    </footer>
   )
 }

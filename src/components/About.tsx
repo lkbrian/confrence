@@ -11,8 +11,8 @@ const cards = [
 
 export default function About() {
   return (
-    <motion.section id="about" className="px-5 py-20 lg:px-8 bg-white w-full" {...revealProps}>
-      <div className="container mx-auto">
+    <section id="about" className="px-5 py-20 lg:px-8 bg-white w-full">
+      <motion.div className="container mx-auto" {...revealProps}>
         <SectionHeading
           eyebrow="About the Conference"
           title="Equip. Encourage. Align."
@@ -84,7 +84,7 @@ export default function About() {
             </div>
           </div>
         </div>
-      </div>
-    </motion.section>
+      </motion.div>
+    </section>
   )
 }

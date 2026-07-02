@@ -35,7 +35,8 @@ export default function Register() {
   }
 
   return (
-    <motion.section id="register" className="bg-brand-dark px-5 py-20 text-white lg:px-8" {...revealProps}>
+    <section id="register" className="bg-brand-dark px-5 py-20 text-white lg:px-8">
+      <motion.div {...revealProps}>
       <SectionHeading eyebrow="Registration" title="Register for the Conference" light strokeWord="Register" />
       <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-[1fr_1.4fr]">
 
@@ -159,6 +160,7 @@ export default function Register() {
           )}
         </form>
       </div>
-    </motion.section>
+      </motion.div>
+    </section>
   )
 }

@@ -37,8 +37,8 @@ export default function Speakers() {
           ))}
         </div>
 
-        <h3 className="mt-16 text-center text-xl font-extrabold text-white">Host of Other Speakers for Breakaway Sessions</h3>
-        <div className="mx-auto mt-6 grid max-w-5xl gap-10 sm:grid-cols-2 md:grid-cols-3">
+        {/* <h3 className="mt-16 text-center text-xl font-extrabold text-white">Host of Other Speakers for Breakaway Sessions</h3> */}
+        <div className="mx-auto mt-6 lg:mt-10  grid max-w-5xl gap-10 sm:grid-cols-2 md:grid-cols-3">
           {breakawaySpeakers.map((speaker) => (
             <SpeakerCard key={speaker.name} speaker={speaker} />
           ))}

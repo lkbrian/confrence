@@ -278,4 +278,5 @@ export const sponsors: Sponsor[] = [
   { name: 'Pioneer', image: '/sponsors/pioneerlogo.png' },
   { name: 'Scott Christian University', image: '/sponsors/scott-christian-logo-full.jpeg' },
   { name: 'Truth FM', image: '/sponsors/truthfmlogo.png' },
+  { name: 'Lap Fund', image: '/sponsors/lapfund.png' },
 ]

@@ -9,6 +9,6 @@ export const revealProps = {
   variants: fadeInUp,
   initial: 'hidden',
   whileInView: 'visible',
-  viewport: { once: true, amount: 0.2 },
-  transition: { duration: 0.6, ease: 'easeOut' },
+  viewport: { once: true, amount: 0.1 },
+  transition: { duration: 0.5, ease: 'easeOut' },
 } as const

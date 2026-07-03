@@ -1,7 +1,7 @@
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react'
 import useEmblaCarousel from 'embla-carousel-react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { testimonials } from '../data'
 import { revealProps } from '../lib/motion'
 import SectionHeading from './SectionHeading'
@@ -10,6 +10,7 @@ const TWEEN_FACTOR = 3
 
 export default function Testimonials() {
   const sectionRef = useRef<HTMLElement>(null)
+  const [selectedIndex, setSelectedIndex] = useState(0)
 
   // Parallax: track scroll relative to the section entering/leaving the viewport
   const { scrollYProgress } = useScroll({
@@ -37,16 +38,26 @@ export default function Testimonials() {
     })
   }, [emblaApi])
 
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return
+    setSelectedIndex(emblaApi.selectedScrollSnap())
+  }, [emblaApi])
+
   useEffect(() => {
     if (!emblaApi) return
     applyTween()
+    onSelect()
     emblaApi.on('scroll', applyTween)
     emblaApi.on('reInit', applyTween)
+    emblaApi.on('select', onSelect)
+    emblaApi.on('reInit', onSelect)
     return () => {
       emblaApi.off('scroll', applyTween)
       emblaApi.off('reInit', applyTween)
+      emblaApi.off('select', onSelect)
+      emblaApi.off('reInit', onSelect)
     }
-  }, [emblaApi, applyTween])
+  }, [emblaApi, applyTween, onSelect])
 
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi])
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi])
@@ -74,39 +85,59 @@ export default function Testimonials() {
         />
 
         <div className="relative mx-auto max-w-5xl">
-          <button
-            onClick={scrollPrev}
-            aria-label="Previous testimonial"
-            className="absolute -left-3 top-1/2 z-10 flex size-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur-sm transition hover:bg-white/20 sm:-left-5 lg:-left-7"
-          >
-            <ChevronLeft size={20} />
-          </button>
-          <button
-            onClick={scrollNext}
-            aria-label="Next testimonial"
-            className="absolute -right-3 top-1/2 z-10 flex size-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur-sm transition hover:bg-white/20 sm:-right-5 lg:-right-7"
-          >
-            <ChevronRight size={20} />
-          </button>
-
           <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex">
               {testimonials.map((item) => (
                 <div
                   key={item.name}
-                  className="min-w-0 flex-[0_0_85%] px-3 sm:flex-[0_0_50%] lg:flex-[0_0_40%]"
+                  className="min-w-0 flex-[0_0_85%] px-3 sm:flex-[0_0_60%] lg:flex-[0_0_44%]"
                   style={{ willChange: 'transform, opacity' }}
                 >
-                  <blockquote className="rounded-lg border border-white/20 bg-white p-6 backdrop-blur-sm">
-                    <Quote className="text-brand-red" />
-                    <p className="mt-4 text-lg font-semibold leading-8 text-slate-800">
+                  <blockquote className="relative overflow-hidden rounded-2xl bg-white p-8 shadow-xl">
+                    <Quote className="pointer-events-none absolute -top-3 right-4 text-brand-red/10" size={96} strokeWidth={1} />
+                    <Quote className="relative text-brand-red" size={26} />
+                    <p className="relative mt-5 text-lg font-semibold leading-8 text-slate-800">
                       "{item.quote}"
                     </p>
-                    <cite className="mt-5 block font-bold not-italic text-slate-800">{item.name}</cite>
+                    <div className="relative mt-6 flex items-center gap-3">
+                      <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-brand-dark text-sm font-extrabold text-white">
+                        {item.name.charAt(0)}
+                      </span>
+                      <cite className="font-bold not-italic text-slate-800">{item.name}</cite>
+                    </div>
                   </blockquote>
                 </div>
               ))}
             </div>
+          </div>
+
+          <div className="mt-8 flex items-center justify-center gap-6">
+            <button
+              onClick={scrollPrev}
+              aria-label="Previous testimonial"
+              className="grid size-10 shrink-0 cursor-pointer place-items-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur-sm transition hover:bg-white/20"
+            >
+              <ChevronLeft size={18} />
+            </button>
+
+            <div className="flex items-center gap-2">
+              {testimonials.map((item, i) => (
+                <button
+                  key={item.name}
+                  onClick={() => emblaApi?.scrollTo(i)}
+                  aria-label={`Go to testimonial ${i + 1}`}
+                  className={`h-2 cursor-pointer rounded-full transition-all ${i === selectedIndex ? 'w-6 bg-brand-red' : 'w-2 bg-white/30 hover:bg-white/50'}`}
+                />
+              ))}
+            </div>
+
+            <button
+              onClick={scrollNext}
+              aria-label="Next testimonial"
+              className="grid size-10 shrink-0 cursor-pointer place-items-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur-sm transition hover:bg-white/20"
+            >
+              <ChevronRight size={18} />
+            </button>
           </div>
         </div>
       </motion.div>

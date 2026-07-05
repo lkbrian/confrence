@@ -23,27 +23,27 @@ export default function Topics() {
   return (
     <section id="topics" className="bg-brand-cream px-5 py-20 lg:px-8">
       <motion.div {...revealProps}>
-      <SectionHeading
-        eyebrow="Trans-Generational Mentorship"
-        title="Session topics shaping the conversation."
-        strokeWord="Topics"
-      />
+        <SectionHeading
+          eyebrow="Trans-Generational Mentorship"
+          title="Session topics shaping the conversation."
+          strokeWord="Topics"
+        />
 
-      <div className="mx-auto max-w-7xl">
-        <h3 className="text-xl font-extrabold text-brand-dark">Plenary Sessions</h3>
-        <div className="mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {plenaryTopics.map((topic) => (
-            <TopicCard key={topic.code} topic={topic} />
-          ))}
-        </div>
+        <div className="mx-auto max-w-7xl">
+          <h3 className="text-xl font-extrabold text-brand-dark">Plenary Sessions</h3>
+          <div className="mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {plenaryTopics.map((topic) => (
+              <TopicCard key={topic.code} topic={topic} />
+            ))}
+          </div>
 
-        <h3 className="mt-14 text-xl font-extrabold text-brand-dark">Pastoral Challenge Sessions</h3>
-        <div className="mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {pastoralChallengeTopics.map((topic) => (
-            <TopicCard key={topic.code} topic={topic} />
-          ))}
+          <h3 className="mt-14 text-xl font-extrabold text-brand-dark">Pastoral Charge Sessions</h3>
+          <div className="mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {pastoralChallengeTopics.map((topic) => (
+              <TopicCard key={topic.code} topic={topic} />
+            ))}
+          </div>
         </div>
-      </div>
       </motion.div>
     </section>
   )

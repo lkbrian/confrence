@@ -49,7 +49,7 @@ export const speakers: Speaker[] = [
   },
   {
     name: 'Bishop David Kipsoi',
-    ministry: 'Pastoral Charge Speaker',
+    ministry: 'Bishop, Elgeyo Marakwet Area',
     bio: 'Analyzing 1 and 2 Timothy to extract timeless principles for training younger, culturally distinct leaders in the Pauline mentorship tradition.',
     image: '/speakers/dkipsoi.jpg',
     imagePosition: 'top',
@@ -72,7 +72,7 @@ export const schedule: ScheduleDay[] = [
       { time: '0730 - 0850', activity: 'Registration', facilitator: 'Secretariat' },
       { time: '0850 - 0900', activity: 'Hymn Moment', facilitator: 'Pr. Odu' },
       { time: '0900 - 0905', activity: 'Host Welcome', facilitator: 'Bishop Dr. Stephen Mairori' },
-      { time: '0905 - 0930', activity: 'Devotion and Conference Opening', facilitator: 'Rev. Dr. Abraham Mulwa (Presiding Bishop, AIC Kenya)' },
+      { time: '0905 - 0930', activity: 'Devotion and Conference Opening', facilitator: 'Bishop Abraham Mulwa (Presiding Bishop, AIC Kenya)' },
       { time: '0930 - 1030', activity: 'Plenary 1: Mutual Trust and Vulnerability', facilitator: 'Bishop David Kipsoi' },
       { time: '1030 - 1115', activity: 'Morning Tea Break', facilitator: 'Hospitality / Secretariat' },
       { time: '1115 - 1130', activity: 'Hymn Moment / Partners Ads', facilitator: 'Pr. Odu / Media' },
@@ -91,7 +91,7 @@ export const schedule: ScheduleDay[] = [
     items: [
       { time: '0800 - 0830', activity: 'Registration', facilitator: 'Secretariat' },
       { time: '0830 - 0845', activity: 'Hymn Moment', facilitator: 'Pr. Odu' },
-      { time: '0845 - 0900', activity: 'Devotions', facilitator: 'Rev. Dr. Semion Adera' },
+      { time: '0845 - 0900', activity: 'Devotions', facilitator: 'Bishop Dr. Simeon Adera' },
       { time: '0900 - 1000', activity: 'Plenary 3: Authority vs. Collaboration', facilitator: 'Daniel Woodring' },
       { time: '1000 - 1045', activity: 'Morning Tea Break', facilitator: 'Hospitality / Secretariat' },
       { time: '1045 - 1145', activity: 'Plenary 4: Clashing Ministry Philosophies', facilitator: 'Bill Ndindi' },
@@ -116,7 +116,7 @@ export const schedule: ScheduleDay[] = [
       { time: '1045 - 1145', activity: 'Plenary 6: Reverse Mentorship in Ministry', facilitator: 'Daniel Woodring' },
       { time: '1145 - 1150', activity: 'Hymn Moment', facilitator: 'Pr. Odu' },
       { time: '1150 - 1300', activity: 'Pastoral Charge 3: The Elijah-Elisha Succession', facilitator: 'Dr. Garry Dull' },
-      { time: '1300 - 1330', activity: 'Conference Closing / Resolutions / Certification', facilitator: 'Organizing Committee / Rev. Dr. Abraham Mulwa' },
+      { time: '1300 - 1330', activity: 'Conference Closing / Resolutions / Certification', facilitator: 'Organizing Committee / Bishop Abraham Mulwa' },
       { time: '1330 - 1400', activity: 'Lunch / Departure', facilitator: 'Hospitality / Secretariat' },
     ],
   },
@@ -246,19 +246,19 @@ export const faqs: [string, string][] = [
 ]
 
 export const office: OfficeMember[] = [
-  { name: 'Rev. Abraham Mulwa', title: 'Presiding Bishop', image: '/office/mulwa.png' },
+  { name: 'Bishop Abraham Mulwa', title: 'Presiding Bishop, AIC Kenya', image: '/office/mulwa.png' },
   { name: 'Bishop Paul Kirui', title: 'Deputy Presiding Bishop', image: '/office/kirui.png' },
-  { name: "Rev. Dr. Simeon Adera Ng'uono", title: 'Administrative Secretary', image: '/office/simon.jpg' },
+  { name: 'Bishop Dr. Simeon Adera', title: 'Administrative Secretary, AIC Kenya', image: '/office/simon.jpg' },
 ]
 
 export const committee: CommitteeMember[] = [
-  { name: 'Rev. Dr. Luke Odhiambo', title: 'Chairman', image: '/committee/Chairman.png' },
+  { name: 'Rev. Dr. Luke Odhiambo', title: 'Chairman', image: '/committee/luke.jpeg' },
   { name: 'Rev. Dr. Sammy Muthini', title: 'Vice Chairman', image: '/committee/Vice-Chairman.png' },
   { name: 'Rev. Stanley Mutangili', title: 'Secretary', image: '/committee/Secretary.png' },
-  { name: 'Mr. Paul Mugo', title: 'Finance' },
-  { name: 'Rev. John Kitala', title: 'Member', image: '/committee/Kitala.png' },
+  { name: 'Mr. Paul Mugo', title: 'Finance', image: '/committee/mugo.jpeg' },
+  { name: 'Rev. John Kitala', title: 'Member', image: '/committee/kitala.jpeg' },
   { name: 'Rev. Raymond Kyengo', title: 'Member', image: '/committee/raymond.jpeg' },
-  { name: 'Pr. Benson Waema', title: 'Member', image: '/committee/Waema.png' },
+  { name: 'Pr. Benson Waema', title: 'Member', image: '/committee/waema.jpeg' },
   { name: 'Rev. John Katete', title: 'Member', image: '/committee/Treasurer.png' },
 ]
 

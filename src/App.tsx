@@ -7,13 +7,14 @@ import Gallery from './components/Gallery'
 import Hero from './components/Hero'
 import Navbar from './components/Navbar'
 import Office from './components/Office'
+import PanelistQA from './components/PanelistQA'
 import Register from './components/Register'
 import Schedule from './components/Schedule'
 import Speakers from './components/Speakers'
 import Sponsors from './components/Sponsors'
 import Testimonials from './components/Testimonials'
 import Topics from './components/Topics'
-import Tracks from './components/Tracks'
+// import Tracks from './components/Tracks'
 import Venue from './components/Venue'
 
 function App() {
@@ -27,7 +28,8 @@ function App() {
       <Speakers />
       <Schedule />
       <Topics />
-      <Tracks />
+      {/* <Tracks /> */}
+      <PanelistQA />
       <Venue />
       <Register />
       <Gallery />

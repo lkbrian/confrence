@@ -1,5 +1,6 @@
-import { User } from 'lucide-react'
+import { ArrowRight, User } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { committee } from '../data'
 import { revealProps } from '../lib/motion'
 import SectionHeading from './SectionHeading'
@@ -10,7 +11,7 @@ const rest = committee.filter((m) => m.title !== 'Chairman' && m.title !== 'Vice
 
 function MemberCard({ member, large = false }: { member: CommitteeMember; large?: boolean }) {
   const sizeClasses = `h-50 w-50 rounded-full shadow-lg ${large ? 'sm:h-58 sm:w-58 lg:h-64 lg:w-64' : ''}`
-  return (
+  const card = (
     <div className="flex flex-col items-center gap-4 text-center">
       {member.image ? (
         <img
@@ -30,6 +31,21 @@ function MemberCard({ member, large = false }: { member: CommitteeMember; large?
         </span>
       </div>
     </div>
+  )
+
+  if (!member.forewordSlug) return card
+
+  return (
+    <Link
+      to={`/foreword/${member.forewordSlug}`}
+      aria-label={`Read ${member.name}'s foreword message`}
+      className="group flex flex-col items-center gap-4 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-brand-dark"
+    >
+      {card}
+      <span className="inline-flex items-center gap-2 text-sm font-semibold text-white/80 transition-colors group-hover:text-white">
+        Read foreword <ArrowRight size={16} aria-hidden="true" />
+      </span>
+    </Link>
   )
 }
 

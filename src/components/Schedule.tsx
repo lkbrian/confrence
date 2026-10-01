@@ -108,7 +108,7 @@ export default function Schedule() {
                 {dayIndex + 1}
               </span>
             </div>
-            <div className="grid gap-8 p-6 sm:grid-cols-3">
+            <div className={`grid gap-8 p-6 ${dayIndex === 2 ? 'sm:grid-cols-2' : 'sm:grid-cols-3'}`} >
               {columns.map((columnItems, i) => (
                 <ScheduleColumn key={i} items={columnItems} />
               ))}

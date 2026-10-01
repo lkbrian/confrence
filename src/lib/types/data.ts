@@ -4,6 +4,7 @@ export type Speaker = {
   bio: string
   image: string
   imagePosition?: string
+  forewordSlug?: string
 }
 
 export type ScheduleItem = {
@@ -40,10 +41,12 @@ export type CommitteeMember = {
   name: string
   title: string
   image?: string
+  forewordSlug?: string
 }
 
 export type OfficeMember = {
   name: string
   title: string
   image?: string
+  forewordSlug?: string
 }

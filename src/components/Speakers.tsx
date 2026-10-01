@@ -1,4 +1,6 @@
+import { ArrowRight } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { speakers } from '../data'
 import { revealProps } from '../lib/motion'
 import SectionHeading from './SectionHeading'
@@ -8,7 +10,7 @@ const plenarySpeakers = speakers.filter((s) => s.ministry === 'Plenary Speaker')
 const breakawaySpeakers = speakers.filter((s) => s.ministry !== 'Plenary Speaker')
 
 function SpeakerCard({ speaker }: { speaker: Speaker }) {
-  return (
+  const card = (
     <div className="flex flex-col items-center gap-4 text-center">
       <img
         src={speaker.image}
@@ -23,6 +25,21 @@ function SpeakerCard({ speaker }: { speaker: Speaker }) {
         </span>
       </div>
     </div>
+  )
+
+  if (!speaker.forewordSlug) return card
+
+  return (
+    <Link
+      to={`/foreword/${speaker.forewordSlug}`}
+      aria-label={`Read ${speaker.name}'s foreword message`}
+      className="group flex flex-col items-center gap-4 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-brand-dark"
+    >
+      {card}
+      <span className="inline-flex items-center gap-2 text-sm font-semibold text-white/80 transition-colors group-hover:text-white">
+        Read foreword <ArrowRight size={16} aria-hidden="true" />
+      </span>
+    </Link>
   )
 }
 

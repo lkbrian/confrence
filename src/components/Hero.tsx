@@ -81,7 +81,7 @@ export default function Hero() {
             animate="show"
             custom={1.15}
           >
-            3rd AIC National <span className="playfair-italic">Pastors Conference</span> 2026
+            3rd AIC National <br /><span className="instrument-italic">Pastors Conference</span> <br />2026
           </motion.h1>
 
           <motion.p

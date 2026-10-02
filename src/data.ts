@@ -57,7 +57,7 @@ export const speakers: Speaker[] = [
   },
   {
     name: 'Jeff Coleman',
-    ministry: 'Plenary speaker',
+    ministry: 'Plenary Speaker',
     bio: 'Leading the Church-Government Relationship track — equipping pastors to engage civic structures with wisdom, biblical integrity, and prophetic clarity.',
     image: '/speakers/coleman.jpg',
     imagePosition: 'top',
@@ -185,12 +185,12 @@ export const pastoralChallengeTopics: Topic[] = [
     brief: 'Analyzing 1 and 2 Timothy to extract principles for training younger, culturally distinct leaders.',
     speaker: 'Kevin Howard',
   },
-  {
-    code: 'Pc3',
-    topic: 'Preparing for Retirement - The Elijah-Elisha Succession',
-    brief: 'Studying the psychological dynamics of inheriting double portions of responsibility and spiritual weight.',
-    speaker: 'Rev. Joseph Ndebe Kiiru',
-  },
+  // {
+  //   code: 'Pc3',
+  //   topic: 'Preparing for Retirement - The Elijah-Elisha Succession',
+  //   brief: 'Studying the psychological dynamics of inheriting double portions of responsibility and spiritual weight.',
+  //   speaker: 'Rev. Joseph Ndebe Kiiru',
+  // },
 ]
 
 export const tracks = [

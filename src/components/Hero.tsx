@@ -75,13 +75,19 @@ export default function Hero() {
         {/* Left — text */}
         <div>
           <motion.h1
-            className="w-full text-5xl font-extrabold leading-[1.02] lg:text-6xl"
+            className="w-full relative text-5xl font-extrabold leading-[1.02] lg:text-6xl"
             variants={fadeUp}
             initial="hidden"
             animate="show"
             custom={1.15}
           >
-            3rd AIC National <br /><span className="instrument-italic">Pastors Conference</span> <br />2026
+            <span>3</span>
+            <sup className=' text-base absolute left-7 -top-3'>rd</sup>
+            <span className='ml-5'>AIC National</span> 
+            <br />
+            <span className="instrument-italic text-[40px] sm:text-5xl lg:text-6xl ">Pastors Conference</span> 
+            <br />
+            <span>2026</span>
           </motion.h1>
 
           <motion.p

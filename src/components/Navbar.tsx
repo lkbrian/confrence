@@ -60,7 +60,7 @@ export default function Navbar() {
         <a
           href="#hero"
           onClick={(e) => navLink(e, 'hero')}
-          className="flex items-center bg-white font-bold gap-3 p-1 rounded-xs"
+          className="flex items-center bg-white font-bold gap-3 p-1 px-3 rounded-xs"
         >
           <img className="w-60" src="/aic-logo.png" alt="" />
         </a>

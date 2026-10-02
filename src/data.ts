@@ -336,8 +336,6 @@ Let us approach these sessions with open hearts, ready to learn, unlearn, and re
 
 True ministry does not end when our season closes; its success is proven by the spiritual health of the generation that succeeds us. As the planning committee, our prayer is that this conference will not be just another calendar event, but a holy convocation where divine strategies are unlocked.
 
-We have carefully structured our sessions, workshops, and plenaries to challenge, equip, and inspire you to intentionally pull up the next generation of gospel workers. We encourage you to come with an expectant heart, open to learning, unlearning, and relearning. Let us network, share resources, and together build the necessary bridges across generational gaps so that the praises of the Lord will continue to resound in our sanctuaries for generations to come.
-
-Welcome to the Conference!`,
+We have carefully structured our sessions, workshops, and plenaries to challenge, equip, and inspire you to intentionally pull up the next generation of gospel workers. We encourage you to come with an expectant heart, open to learning, unlearning, and relearning. Let us network, share resources, and together build the necessary bridges across generational gaps so that the praises of the Lord will continue to resound in our sanctuaries for generations to come.`,
   },
 ]

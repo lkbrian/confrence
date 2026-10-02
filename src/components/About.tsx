@@ -38,7 +38,7 @@ export default function About() {
                 the praiseworthy deeds of the Lord,  his power, and the wonders he has done.
                 He decreed statutes for Jacob and established the law in Israel, which he commanded our ancestors to teach their children, so the next generation would know them, even the children yet to be born, and they in turn would tell their children. Then they would put their trust in God and would not forget his deeds but would keep his commands"
               </p>
-              <cite className="mt-2 block playfair-italic text-2xl font-semibold text-brand-red">Psalm 78:4-7</cite>
+              <cite className="mt-2 block instrument-italic text-2xl font-medium text-brand-red">Psalm 78:4-7</cite>
             </blockquote>
           </div>
 
@@ -49,7 +49,7 @@ export default function About() {
                 className="relative overflow-visible rounded-lg border z-10 border-stone-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
               >
                 <div className="absolute bg-white z-20 -top-4 -right-2 px-2 ">
-                  <span className="text-7xl font-black text-transparent opacity-[0.06] [-webkit-text-stroke:1.5px_#042a35] display">01</span>
+                  <span className="text-7xl font-black text-transparent opacity-[0.15] [-webkit-text-stroke:1.5px_#d20205] display">01</span>
                 </div>
 
                 <div className="relative flex flex-col gap-2">
@@ -69,7 +69,7 @@ export default function About() {
                   className="relative overflow-visible rounded-lg border z-10 border-stone-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
                 >
                   <div className="absolute bg-white z-20 -top-4 -right-2 px-2 ">
-                    <span className="text-7xl font-black text-transparent opacity-[0.06] [-webkit-text-stroke:1.5px_#042a35] display">0{index + 2}</span>
+                    <span className="text-7xl font-black text-transparent opacity-[0.15] [-webkit-text-stroke:1.5px_#d20205] display">0{index + 2}</span>
                   </div>
 
                   <div className="relative flex flex-col gap-2">

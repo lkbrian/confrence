@@ -1,3 +1,5 @@
+import { useLayoutEffect } from 'react';
+
 import {
   forewords
 }
@@ -25,6 +27,10 @@ export default function ForewordPage() {
 
     = useParams();
 
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, [slug]);
+
   const foreword = forewords.find((item) => item.slug === slug);
 
   if (!foreword) {
@@ -36,7 +42,7 @@ export default function ForewordPage() {
   return (<main className="relative min-h-screen bg-brand-cream text-stone-900">
     <header className="border-b border-brand-green/12 bg-brand-dark text-white fixed w-full z-40">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3 lg:px-8">
-        <Link to="/" className="flex items-center rounded-md bg-white p-1">
+        <Link to="/" className="flex items-center bg-white font-bold gap-3 p-1 px-3 rounded-xs">
           <img className="w-44 sm:w-60" src="/aic-logo.png" alt="AIC Pastors Conference" />
         </Link>
         <Link to="/" className="inline-flex items-center gap-2 text-sm text-white/80 transition hover:text-white"> <ArrowLeft size={16} /> Back to site </Link>
@@ -110,6 +116,7 @@ export default function ForewordPage() {
               </p>
             ))}
           </div>
+          {slug==='committee'&&<p className='text-2xl sm:text-3xl mt-8 instrument-italic text-center w-fit mx-auto'>Welcome to the Conference!</p>}
         </section>
 
       </article>

@@ -1,25 +1,26 @@
-import { House, Mail, Phone } from 'lucide-react'
+// import { House, Mail, Phone } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { FaHome, FaMailBulk, FaPhone } from 'react-icons/fa'
 import { revealProps } from '../lib/motion'
 import SectionHeading from './SectionHeading'
 
 const contactItems = [
   {
-    Icon: House,
+    Icon: FaHome,
     label: 'Visit Us',
     description: 'Find us at AIC Milimani for the 3rd AIC National Pastors Conference, 6–8 October 2026.',
     value: 'AIC Milimani, Nairobi',
     href: 'https://www.google.com/maps?q=AIC+Milimani+Nairobi+Kenya',
   },
   {
-    Icon: Phone,
+    Icon: FaPhone,
     label: 'Call Us',
     description: 'Call the conference team for help with attendance, registration, or event details.',
     value: '+254 700 000 000',
     href: 'tel:+254700000000',
   },
   {
-    Icon: Mail,
+    Icon: FaMailBulk,
     label: 'Contact Us',
     description: 'Email us with questions about the conference, schedule, or registration.',
     value: 'Conference@aickenya.org',

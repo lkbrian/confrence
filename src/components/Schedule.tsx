@@ -1,6 +1,6 @@
-import { Award, BookOpen, ChevronLeft, ChevronRight, Coffee, Mic2, Music2, Users2 } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Award, BookOpen, ChevronLeft, ChevronRight, Coffee, Mic2, Music2, Users2 } from 'lucide-react'
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { schedule } from '../data'
 import { revealProps } from '../lib/motion'
 import SectionHeading from './SectionHeading'
@@ -68,8 +68,14 @@ function ScheduleColumn({ items }: { items: ScheduleItem[] }) {
 
 export default function Schedule() {
   const [dayIndex, setDayIndex] = useState(getInitialDayIndex)
+  const cardRef = useRef<HTMLElement>(null)
   const day = schedule[dayIndex]
   const columns = splitIntoColumns(day.items)
+
+  function goToDay(index: number) {
+    setDayIndex(index)
+    cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
 
   return (
     <section id="schedule" className="bg-white px-5 py-10 pt-20 lg:px-8">
@@ -98,7 +104,7 @@ export default function Schedule() {
             </button>
           </div>
 
-          <article className="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm">
+          <article ref={cardRef} className="scroll-mt-24 overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm">
             <div className="flex items-center justify-between gap-4 bg-brand-dark px-6 py-5">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-green">{day.day}</p>
@@ -113,7 +119,29 @@ export default function Schedule() {
                 <ScheduleColumn key={i} items={columnItems} />
               ))}
             </div>
-          </article>
+           
+          </article> <div className="flex items-center justify-between gap-4 px-6 py-5">
+              {dayIndex > 0 && (
+                <button
+                  type="button"
+                  onClick={() => goToDay(dayIndex - 1)}
+                  className="inline-flex items-center cursor-pointer gap-2 rounded-full border border-brand-red px-5 py-2.5 text-sm font-bold text-brand-red transition hover:bg-brand-red hover:text-white"
+                >
+                  <ArrowLeft size={16} />
+                  <span>Previous day</span>
+                </button>
+              )}
+              {dayIndex < schedule.length - 1 && (
+                <button
+                  type="button"
+                  onClick={() => goToDay(dayIndex + 1)}
+                  className="ml-auto inline-flex cursor-pointer items-center gap-2 rounded-full bg-brand-red px-5 py-2.5 text-sm font-bold text-white transition hover:bg-brand-dark"
+                >
+                  <span>Next day</span>
+                  <ArrowRight size={16} />
+                </button>
+              )}
+            </div>
         </div>
       </motion.div>
     </section>

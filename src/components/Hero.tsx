@@ -81,9 +81,9 @@ export default function Hero() {
             animate="show"
             custom={1.15}
           >
-            <span>3</span>
-            <sup className=' text-base absolute left-7 -top-3'>rd</sup>
-            <span className='ml-5'>AIC National</span> 
+            <span>3rd</span>
+            {/* <sup className=' text-base absolute left-7 -top-3'>rd</sup> */}
+            <span className='ml-2'>AIC National</span> 
             <br />
             <span className="instrument-italic text-[40px] sm:text-5xl lg:text-6xl ">Pastors Conference</span> 
             <br />

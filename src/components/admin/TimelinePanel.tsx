@@ -1,6 +1,6 @@
-import { ListOrdered, RotateCcw, Timer } from 'lucide-react'
+import { ListOrdered, RotateCcw, Timer, TimerOff } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { fmt } from '@/lib/timeline'
+import { fmt, maxReduction, signed } from '@/lib/timeline'
 import type { LiveEvent } from '@/lib/types/happening'
 import AdminPanel from './AdminPanel'
 
@@ -8,16 +8,19 @@ type TimelinePanelProps = {
   dayIndex: number
   events: LiveEvent[]
   currentId?: string
+  /** Current conference-day minutes when this day is today; live sessions can't be shortened into the past. */
+  now?: number
   onExtend: (event: LiveEvent) => void
+  onShorten: (event: LiveEvent) => void
   onReset: (event: LiveEvent) => void
 }
 
-export default function TimelinePanel({ dayIndex, events, currentId, onExtend, onReset }: TimelinePanelProps) {
+export default function TimelinePanel({ dayIndex, events, currentId, now, onExtend, onShorten, onReset }: TimelinePanelProps) {
   const totalShift = events.reduce((sum, e) => sum + e.extendedBy, 0)
   return (
     <AdminPanel
       title={`Day ${dayIndex + 1} timeline`}
-      description={totalShift ? `Running ${totalShift} min behind the printed programme.` : 'On the printed programme.'}
+      description={totalShift ? `Running ${Math.abs(totalShift)} min ${totalShift > 0 ? 'behind' : 'ahead of'} the printed programme.` : 'On the printed programme.'}
       icon={<ListOrdered size={16} />}
     >
       <ol className="-mx-2 divide-y divide-stone-100">
@@ -39,16 +42,19 @@ export default function TimelinePanel({ dayIndex, events, currentId, onExtend, o
                 {event.facilitator && <p className="truncate text-xs text-stone-500">{event.facilitator}</p>}
               </div>
               <div className="ml-auto flex shrink-0 items-center gap-1.5">
-                {event.extendedBy > 0 && (
+                {event.extendedBy !== 0 && (
                   <>
-                    <span className="rounded-full bg-brand-dark px-2 py-0.5 text-xs font-bold text-white">+{event.extendedBy}m</span>
-                    <Button variant="ghost" size="sm" onClick={() => onReset(event)} aria-label={`Reset extension for ${event.activity}`}>
+                    <span className={`rounded-full px-2 py-0.5 text-xs font-bold text-white ${event.extendedBy > 0 ? 'bg-brand-dark' : 'bg-brand-green'}`}>{signed(event.extendedBy)}m</span>
+                    <Button variant="ghost" size="sm" onClick={() => onReset(event)} aria-label={`Reset time change for ${event.activity}`}>
                       <RotateCcw />
                     </Button>
                   </>
                 )}
-                <Button variant="outline" size="sm" onClick={() => onExtend(event)}>
-                  <Timer /> Extend
+                <Button variant="outline" size="sm" onClick={() => onShorten(event)} disabled={maxReduction(event, now) === 0} aria-label={`Shorten ${event.activity}`}>
+                  <TimerOff /> <span className="hidden sm:inline">Shorten</span>
+                </Button>
+                <Button variant="outline" size="sm" onClick={() => onExtend(event)} aria-label={`Extend ${event.activity}`}>
+                  <Timer /> <span className="hidden sm:inline">Extend</span>
                 </Button>
               </div>
             </li>

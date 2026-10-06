@@ -1,4 +1,4 @@
-import { AlertCircle, ExternalLink, Loader2, Timer, TriangleAlert } from 'lucide-react'
+import { AlertCircle, ExternalLink, Loader2, Timer, TimerOff, TriangleAlert } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import AdminPanel from '@/components/admin/AdminPanel'
@@ -12,9 +12,9 @@ import UpdateComposer from '@/components/admin/UpdateComposer'
 import { Button } from '@/components/ui/button'
 import DayTabs from '@/components/user/happening/DayTabs'
 import { QUICK_MINUTES } from '@/lib/adminStyles'
-import { deleteAnnouncement, deleteUpdate, extendEvent, resetAll, resetExtension, useHappening } from '@/lib/happening'
+import { adjustEvent, deleteAnnouncement, deleteUpdate, resetAll, resetExtension, useHappening } from '@/lib/happening'
 import { useSchedule } from '@/lib/scheduleStore'
-import { buildDay, fmt, useClock } from '@/lib/timeline'
+import { buildDay, fmt, isLiveAt, maxReduction, signed, startsIn, useClock } from '@/lib/timeline'
 import { useLiveStatus } from '@/lib/useLiveStatus'
 import type { LiveEvent } from '@/lib/types/happening'
 import { useAdminRun } from '@/lib/useAdminRun'
@@ -33,19 +33,21 @@ export default function AdminHappening() {
   const day = dayIndex + 1
   const events = useMemo(() => buildDay(dayIndex, data.extensions, schedule), [dayIndex, data.extensions, schedule])
 
-  const [extend, setExtend] = useState<{ event: LiveEvent; minutes: number } | null>(null)
+  // Positive minutes extend the session, negative minutes shorten it.
+  const [adjust, setAdjust] = useState<{ event: LiveEvent; minutes: number } | null>(null)
   const [confirm, setConfirm] = useState<PendingConfirm | null>(null)
   const [busy, setBusy] = useState(false)
 
   const run = useAdminRun(push, refresh)
 
-  async function confirmExtend() {
-    if (!extend) return
+  async function confirmAdjust() {
+    if (!adjust || adjust.minutes === 0) return
     setBusy(true)
-    const { event, minutes } = extend
-    const ok = await run(() => extendEvent(event, minutes), `${event.activity} extended by ${minutes} min. Now ends at ${fmt(event.end + minutes)}.`)
+    const { event, minutes } = adjust
+    const verb = minutes > 0 ? 'extended' : 'shortened'
+    const ok = await run(() => adjustEvent(event, minutes, nowFor(event)), `${event.activity} ${verb} by ${Math.abs(minutes)} min. Now ends at ${fmt(event.end + minutes)}.`)
     setBusy(false)
-    if (ok) setExtend(null)
+    if (ok) setAdjust(null)
   }
 
   async function confirmAction() {
@@ -56,8 +58,15 @@ export default function AdminHappening() {
     if (ok) setConfirm(null)
   }
 
-  const extendEvents = extend ? buildDay(extend.event.dayIndex, data.extensions) : []
-  const laterCount = extend ? extendEvents.length - extend.event.index - 1 : 0
+  const adjustEvents = adjust ? buildDay(adjust.event.dayIndex, data.extensions) : []
+  const laterCount = adjust ? adjustEvents.length - adjust.event.index - 1 : 0
+  const shortening = Boolean(adjust && adjust.minutes < 0)
+
+  // The current time, but only for a session running live today: shortening then can't end it in the past.
+  function nowFor(event: LiveEvent) {
+    return status.isConferenceDay && event.dayIndex === status.dayIndex && isLiveAt(event, clock.minutes) ? clock.minutes : undefined
+  }
+  const adjustNow = adjust ? nowFor(adjust.event) : undefined
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-5 lg:px-8">
@@ -87,19 +96,21 @@ export default function AdminHappening() {
       ) : (
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.15fr_1fr] lg:items-start">
           <div className="space-y-6">
-            <LiveControl status={status} clock={clock} onExtend={(event, minutes) => setExtend({ event, minutes })} />
+            <LiveControl status={status} clock={clock} onAdjust={(event, minutes) => setAdjust({ event, minutes })} />
             <TimelinePanel
               dayIndex={dayIndex}
               events={events}
               currentId={status.isConferenceDay && dayIndex === status.dayIndex ? status.current?.id : undefined}
-              onExtend={(event) => setExtend({ event, minutes: 15 })}
+              now={status.isConferenceDay && dayIndex === status.dayIndex ? clock.minutes : undefined}
+              onExtend={(event) => setAdjust({ event, minutes: 15 })}
+              onShorten={(event) => setAdjust({ event, minutes: -Math.min(15, maxReduction(event, nowFor(event))) })}
               onReset={(event) =>
                 setConfirm({
-                  title: `Remove the +${event.extendedBy} min extension?`,
-                  body: `${event.activity} will end at ${fmt(event.end - event.extendedBy)} and later sessions move forward by ${event.extendedBy} min.`,
-                  label: 'Remove extension',
+                  title: `Remove the ${signed(event.extendedBy)} min change?`,
+                  body: `${event.activity} will end at ${fmt(event.end - event.extendedBy)} and later sessions move ${event.extendedBy > 0 ? 'forward' : 'back'} by ${Math.abs(event.extendedBy)} min.`,
+                  label: 'Restore original time',
                   action: () => resetExtension(event.id),
-                  success: 'Extension removed. Times updated.',
+                  success: 'Original time restored. Times updated.',
                 })
               }
             />
@@ -146,30 +157,49 @@ export default function AdminHappening() {
       )}
 
       <ConfirmDialog
-        open={Boolean(extend)}
-        title={extend ? `Extend "${extend.event.activity}"?` : ''}
-        confirmLabel={extend ? `Extend +${extend.minutes} min` : 'Extend'}
+        open={Boolean(adjust)}
+        title={adjust ? `${shortening ? 'Shorten' : 'Extend'} "${adjust.event.activity}"?` : ''}
+        confirmLabel={adjust ? `${shortening ? 'Shorten' : 'Extend'} ${signed(adjust.minutes)} min` : 'Confirm'}
         busy={busy}
-        onCancel={() => setExtend(null)}
-        onConfirm={confirmExtend}
+        onCancel={() => setAdjust(null)}
+        onConfirm={confirmAdjust}
       >
-        {extend && (
+        {adjust && (
           <>
             <div className="mb-4 flex flex-wrap gap-2">
-              {QUICK_MINUTES.map((m) => (
+              {QUICK_MINUTES.map((m) => {
+                const value = shortening ? -m : m
+                const Icon = shortening ? TimerOff : Timer
+                return (
+                  <button
+                    key={m}
+                    type="button"
+                    disabled={shortening && m > maxReduction(adjust.event, adjustNow)}
+                    onClick={() => setAdjust({ ...adjust, minutes: value })}
+                    className={`inline-flex items-center gap-1 rounded-full border px-3 py-1 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-40 ${adjust.minutes === value ? 'border-brand-red bg-brand-red text-white' : 'border-stone-300 hover:border-brand-red'}`}
+                  >
+                    <Icon size={13} /> {signed(value)}
+                  </button>
+                )
+              })}
+              {shortening && adjustNow !== undefined && (
                 <button
-                  key={m}
                   type="button"
-                  onClick={() => setExtend({ ...extend, minutes: m })}
-                  className={`inline-flex items-center gap-1 rounded-full border px-3 py-1 text-sm font-semibold transition ${extend.minutes === m ? 'border-brand-red bg-brand-red text-white' : 'border-stone-300 hover:border-brand-red'}`}
+                  onClick={() => setAdjust({ ...adjust, minutes: adjustNow - adjust.event.end })}
+                  className={`inline-flex items-center gap-1 rounded-full border px-3 py-1 text-sm font-semibold transition ${adjust.minutes === adjustNow - adjust.event.end ? 'border-brand-red bg-brand-red text-white' : 'border-stone-300 hover:border-brand-red'}`}
                 >
-                  <Timer size={13} /> +{m}
+                  <TimerOff size={13} /> End now
                 </button>
-              ))}
+              )}
             </div>
+            {adjustNow !== undefined && (
+              <p className="mb-2 font-semibold text-brand-green">
+                Live now ({fmt(adjustNow)}): {startsIn(adjustNow - adjust.event.start)} in, {startsIn(adjust.event.end - adjustNow)} left.
+              </p>
+            )}
             <p>
-              It will end at <strong>{fmt(extend.event.end + extend.minutes)}</strong> instead of {fmt(extend.event.end)}.
-              {laterCount > 0 ? ` ${laterCount} later session${laterCount === 1 ? '' : 's'} on Day ${extend.event.dayIndex + 1} will move back by ${extend.minutes} min.` : ''}
+              It will end at <strong>{fmt(adjust.event.end + adjust.minutes)}</strong> instead of {fmt(adjust.event.end)}.
+              {laterCount > 0 ? ` ${laterCount} later session${laterCount === 1 ? '' : 's'} on Day ${adjust.event.dayIndex + 1} will move ${shortening ? 'forward' : 'back'} by ${Math.abs(adjust.minutes)} min.` : ''}
             </p>
             <p className="mt-2 text-stone-500">An update will be posted to the live feed automatically.</p>
           </>

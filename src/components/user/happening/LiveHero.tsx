@@ -2,7 +2,7 @@ import { Clock, MapPin, Timer } from 'lucide-react'
 import { useSchedule } from '../../../lib/scheduleStore'
 import { sessionBrief, speakerFor, VENUE } from '../../../lib/happeningMeta'
 import BibleFactRotator from './BibleFactRotator'
-import { buildDay, fmt, startsIn, type ConferenceClock } from '../../../lib/timeline'
+import { buildDay, fmt, signed, startsIn, type ConferenceClock } from '../../../lib/timeline'
 import type { Extensions, LiveStatus } from '../../../lib/types/happening'
 
 const HERO_IMAGE = '/gallery/IMG_6916.jpg'
@@ -66,6 +66,12 @@ function HappeningNow({ status, clock, extensions }: LiveHeroProps) {
     <div className="mb-6 lg:mb-14">
       <span className="inline-flex items-center gap-3.5 rounded-full bg-brand-red py-1.5 pl-4 pr-4 text-xs font-extrabold uppercase tracking-[0.16em] text-white shadow-lg sm:text-sm">
         <LiveDot /> {pill}
+        {live && (
+          <>
+            <span className="h-3.5 w-px bg-white/40" aria-hidden />
+            <time className="tabular-nums tracking-[0.08em]" aria-label={`Current time ${fmt(clock.minutes)}`}>{fmt(clock.minutes)}</time>
+          </>
+        )}
       </span>
 
       <h1 className={`mt-4 max-w-4xl font-black uppercase leading-[1.05] tracking-tight text-white display ${titleSize}`}>{title}</h1>
@@ -97,9 +103,9 @@ function HappeningNow({ status, clock, extensions }: LiveHeroProps) {
             ) : (
               isConferenceDay && event.start > clock.minutes && <span>Starts in {startsIn(event.start - clock.minutes)}</span>
             )}
-            {event.extendedBy > 0 && (
+            {event.extendedBy !== 0 && (
               <span className="inline-flex items-center gap-1 rounded-sm bg-white/15 px-2.5 py-0.5 text-xs font-bold text-white">
-                <Timer size={13} /> Extended +{event.extendedBy} min
+                <Timer size={13} /> {event.extendedBy > 0 ? 'Extended' : 'Shortened'} {signed(event.extendedBy)} min
               </span>
             )}
           </div>

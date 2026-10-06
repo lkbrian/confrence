@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useHappening } from '@/lib/happening'
 import { useSchedule } from '@/lib/scheduleStore'
 import { fetchRegistrations } from '@/lib/supabase'
-import { fmt, getLiveStatus, startsIn, useClock } from '@/lib/timeline'
+import { fmt, getLiveStatus, signed, startsIn, useClock } from '@/lib/timeline'
 
 function Stat({ label, value, icon, to }: { label: string; value: ReactNode; icon: ReactNode; to: string }) {
   return (
@@ -60,7 +60,7 @@ export default function AdminDashboard() {
                 <p className="mt-2 text-xl font-extrabold leading-snug sm:text-2xl">{status.current.activity}</p>
                 <p className="mt-1 text-sm text-white/70">
                   {fmt(status.current.start)} – {fmt(status.current.end)} · ends in {startsIn(status.current.end - clock.minutes)}
-                  {status.current.extendedBy > 0 && ` · extended +${status.current.extendedBy} min`}
+                  {status.current.extendedBy !== 0 && ` · ${status.current.extendedBy > 0 ? 'extended' : 'shortened'} ${signed(status.current.extendedBy)} min`}
                 </p>
               </>
             ) : (

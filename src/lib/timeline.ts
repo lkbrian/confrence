@@ -28,13 +28,34 @@ export function fmt(minutes: number) {
   return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`
 }
 
+/** 10 → '+10', -10 → '−10' */
+export function signed(minutes: number) {
+  return `${minutes < 0 ? '−' : '+'}${Math.abs(minutes)}`
+}
+
+/** A session can't be shortened below this length. */
+export const MIN_SESSION_MINUTES = 5
+
+export function isLiveAt(event: LiveEvent, now?: number) {
+  return now !== undefined && event.start <= now && now < event.end
+}
+
+/**
+ * How many minutes a session can still be shortened by. Pass `now` (conference-day minutes) for a
+ * session that is live: it can then be cut down to end right now, but never earlier.
+ */
+export function maxReduction(event: LiveEvent, now?: number) {
+  const earliestEnd = isLiveAt(event, now) ? Math.max(now!, event.start + 1) : event.start + MIN_SESSION_MINUTES
+  return Math.max(0, event.end - earliestEnd)
+}
+
 export function eventId(dayIndex: number, index: number) {
   return `d${dayIndex + 1}-${index}`
 }
 
 /**
- * Applies extensions as a cascade: extending a session pushes back
- * every later session on the same day by the same amount.
+ * Applies extensions as a cascade: extending (or shortening, with negative minutes) a session
+ * pushes back (or pulls forward) every later session on the same day by the same amount.
  */
 export function buildDay(dayIndex: number, extensions: Extensions, days = getSchedule()): LiveEvent[] {
   let shift = 0

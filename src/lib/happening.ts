@@ -1,7 +1,7 @@
 import type { PostgrestError } from '@supabase/supabase-js'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { supabase } from './supabase'
-import { fmt } from './timeline'
+import { fmt, maxReduction } from './timeline'
 import type { Announcement, AnnouncementCategory, DayRecap, HappeningData, LiveEvent, LiveUpdate, UpdateKind } from './types/happening'
 
 // Must match the bucket referenced in policies by supabase/happening.sql. Uploads use the admin's
@@ -81,7 +81,16 @@ export function useHappening() {
   return { data, loading, error, refresh }
 }
 
-export async function extendEvent(event: LiveEvent, minutes: number) {
+/**
+ * Extends (positive minutes) or shortens (negative minutes) a session; later sessions cascade.
+ * `now` is the current conference-day time when the session is live, so it can't end in the past.
+ */
+export async function adjustEvent(event: LiveEvent, minutes: number, now?: number) {
+  const limit = maxReduction(event, now)
+  if (minutes < 0 && -minutes > limit) {
+    throw new Error(`${event.activity} can be shortened by at most ${limit} min.`)
+  }
+
   const { data: row, error: readError } = await supabase
     .from('event_extensions')
     .select('minutes')
@@ -90,16 +99,18 @@ export async function extendEvent(event: LiveEvent, minutes: number) {
   check(readError)
 
   const total = (row?.minutes ?? 0) + minutes
-  const { error } = await supabase
-    .from('event_extensions')
-    .upsert({ event_id: event.id, minutes: total, updated_at: new Date().toISOString() })
+  const { error } =
+    total === 0
+      ? await supabase.from('event_extensions').delete().eq('event_id', event.id)
+      : await supabase.from('event_extensions').upsert({ event_id: event.id, minutes: total, updated_at: new Date().toISOString() })
   check(error)
 
+  const amount = Math.abs(minutes)
   await addUpdate({
     day: event.dayIndex + 1,
     kind: 'session',
-    title: `${event.activity} extended by ${minutes} min`,
-    body: `Now ends at ${fmt(event.end + minutes)}. Later sessions today have moved back by ${minutes} minutes.`,
+    title: `${event.activity} ${minutes > 0 ? 'extended' : 'shortened'} by ${amount} min`,
+    body: `Now ends at ${fmt(event.end + minutes)}. Later sessions today have moved ${minutes > 0 ? 'back' : 'forward'} by ${amount} minutes.`,
   })
 }
 

@@ -5,7 +5,7 @@ import type { LiveEvent } from '../../../lib/types/happening'
 
 function Tags({ event }: { event: LiveEvent }) {
   const tags = [sessionCategory(event), `${event.end - event.start} min`]
-  if (event.shiftedBy > 0) tags.push(`Moved +${event.shiftedBy} min`)
+  if (event.shiftedBy !== 0) tags.push(`Moved ${event.shiftedBy > 0 ? 'later' : 'earlier'} ${Math.abs(event.shiftedBy)} min`)
   return (
     <div className="mt-3 flex flex-wrap gap-1.5">
       {tags.map((tag) => (

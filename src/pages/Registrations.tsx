@@ -12,7 +12,8 @@ import { fetchRegistrations, type PublicRegistration } from '@/lib/supabase'
 
 const PAGE_SIZES = [10, 20, 50, 100]
 
-export default function Registrations() {
+/** `embedded` renders just the content, for use inside the admin layout. */
+export default function Registrations({ embedded = false }: { embedded?: boolean }) {
   const [rows, setRows] = useState<PublicRegistration[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -64,25 +65,10 @@ export default function Registrations() {
     }
   }
 
-  return (
-    <main className="min-h-screen bg-brand-cream text-stone-900">
-      <header className="border-b border-brand-green/12 bg-brand-dark text-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3 lg:px-8">
-          <Link to="/" className="flex items-center rounded-md bg-white p-1">
-            <img className="w-44 sm:w-60" src="/aic-logo.png" alt="AIC Pastors Conference" />
-          </Link>
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 text-sm text-white/80 transition hover:text-white"
-          >
-            <ArrowLeft size={16} /> Back to site
-          </Link>
-        </div>
-      </header>
-
-      <section className="mx-auto max-w-7xl px-5 py-10 lg:px-8">
+  const content = (
+      <section className={embedded ? '' : 'mx-auto max-w-7xl px-5 py-10 lg:px-8'}>
         <p className="text-sm font-bold uppercase tracking-[0.18em] text-brand-green">Conference</p>
-        <h1 className="mt-2 text-3xl font-extrabold text-brand-dark lg:text-4xl">Registrations</h1>
+        <h1 className={`mt-2 font-extrabold text-brand-dark ${embedded ? 'text-2xl sm:text-3xl' : 'text-3xl lg:text-4xl'}`}>Registrations</h1>
 
         <Card className="mt-8">
           <CardHeader className="gap-4 lg:flex-row lg:items-center lg:justify-between">
@@ -223,6 +209,27 @@ export default function Registrations() {
           </CardContent>
         </Card>
       </section>
+  )
+
+  if (embedded) return content
+
+  return (
+    <main className="min-h-screen bg-brand-cream text-stone-900">
+      <header className="border-b border-brand-green/12 bg-brand-dark text-white">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3 lg:px-8">
+          <Link to="/" className="flex items-center rounded-md bg-white p-1">
+            <img className="w-44 sm:w-60" src="/aic-logo.png" alt="AIC Pastors Conference" />
+          </Link>
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 text-sm text-white/80 transition hover:text-white"
+          >
+            <ArrowLeft size={16} /> Back to site
+          </Link>
+        </div>
+      </header>
+
+      {content}
     </main>
   )
 }

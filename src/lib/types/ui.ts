@@ -9,3 +9,6 @@ export type SectionHeadingProps = {
 }
 
 export type RegistrationStatus = 'idle' | 'loading' | 'success' | 'error'
+
+/** Runs an admin write, shows a success/error toast, and resolves to whether it succeeded. */
+export type RunAction = (action: () => Promise<unknown>, successMessage: string) => Promise<boolean>

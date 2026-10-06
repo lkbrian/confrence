@@ -8,6 +8,8 @@ export type Speaker = {
 }
 
 export type ScheduleItem = {
+  /** Row id from public.schedules; absent for the static data.ts programme. */
+  id?: string
   time: string
   activity: string
   facilitator?: string

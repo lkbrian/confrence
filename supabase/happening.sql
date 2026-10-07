@@ -10,8 +10,8 @@
 --      tick "Auto Confirm User". Any password; it is never used.
 --      Every user in this project is an admin: anyone who can sign in can edit the live page,
 --      which is why sign-ups MUST stay disabled.
---   4. Storage: the bucket (VITE_BUCKET_NAME, here 'confrence') is created by you in the dashboard
---      and must be PUBLIC so visitors can see photos. This script only adds its access policies.
+--   4. Storage: create the bucket (VITE_BUCKET_NAME, here 'pastors-conf') in the dashboard as PUBLIC,
+--      then run supabase/storage.sql for its access policies.
 -- Supabase's built-in email sender is heavily rate-limited; for the event, configure custom SMTP
 -- (Authentication → Emails → SMTP Settings) so codes always arrive.
 
@@ -79,19 +79,7 @@ begin
   end loop;
 end $$;
 
--- ── Storage: photos (bucket 'confrence' already exists — policies only) ─────
-
-drop policy if exists "happening photos public read" on storage.objects;
-create policy "happening photos public read" on storage.objects
-  for select to anon, authenticated using (bucket_id = 'confrence');
-
-drop policy if exists "happening photos admin insert" on storage.objects;
-create policy "happening photos admin insert" on storage.objects
-  for insert to authenticated with check (bucket_id = 'confrence');
-
-drop policy if exists "happening photos admin delete" on storage.objects;
-create policy "happening photos admin delete" on storage.objects
-  for delete to authenticated using (bucket_id = 'confrence');
+-- ── Storage: photo bucket policies live in supabase/storage.sql (run separately) ──
 
 -- ── Seed a few announcements (safe to delete) ───────────────────────────────
 insert into public.announcements (category, title, body)

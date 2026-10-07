@@ -39,7 +39,14 @@ export default function RecapPanel({ day, recap, run }: RecapPanelProps) {
               ))}
             </div>
           )}
-          <PhotoPicker day={day} run={run} onPick={(src) => setImages((all) => (all.includes(src) ? all : [...all, src]))} />
+          <PhotoPicker
+            day={day}
+            run={run}
+            multiple
+            selected={images}
+            onPick={(src) => setImages((all) => (all.includes(src) ? all : [...all, src]))}
+            onDelete={(src) => setImages((all) => all.filter((s) => s !== src))}
+          />
         </div>
         <Button onClick={handleSave} disabled={saving || !dirty || (!text.trim() && images.length === 0)} className="bg-brand-dark hover:bg-brand-green">
           {saving ? <Loader2 className="animate-spin" /> : <Save />} {recap ? 'Save recap' : 'Publish recap'}

@@ -6,22 +6,29 @@ import type { Announcement, AnnouncementCategory, DayRecap, HappeningData, LiveE
 
 // Must match the bucket referenced in policies by supabase/happening.sql. Uploads use the admin's
 // auth session + RLS, never S3 access keys (those would be exposed in the browser bundle).
-const PHOTO_BUCKET = (import.meta.env.VITE_BUCKET_NAME as string | undefined) || 'confrence'
+const PHOTO_BUCKET = (import.meta.env.VITE_BUCKET_NAME as string | undefined) || 'pastors-conf'
 
 const EMPTY: HappeningData = { extensions: {}, updates: [], announcements: [], recaps: {} }
 
-/** Thrown when a write is rejected because the admin session is gone or lacks rights. */
+/**
+ * Thrown when the server rejects a write on auth/RLS grounds. That is either an expired session or
+ * missing policies (e.g. for a renamed bucket); useAdminRun asks the auth server which before signing out.
+ */
 export class AuthExpiredError extends Error {
-  constructor() {
+  /** The server's own message, shown when the session turns out to be valid. */
+  detail: string
+
+  constructor(detail = '') {
     super('Your session has expired, please sign in again.')
     this.name = 'AuthExpiredError'
+    this.detail = detail
   }
 }
 
 export function check(error: PostgrestError | null) {
   if (!error) return
   if (error.code === '42501' || error.code === 'PGRST301' || /jwt|row-level security/i.test(error.message)) {
-    throw new AuthExpiredError()
+    throw new AuthExpiredError(error.message)
   }
   throw new Error(error.message)
 }
@@ -163,7 +170,13 @@ export async function resetAll() {
 }
 
 async function resizeImage(file: File, maxSize = 1600): Promise<Blob> {
-  const bitmap = await createImageBitmap(file)
+  const bitmap = await createImageBitmap(file).catch(() => {
+    throw new Error(
+      /\.hei[cf]$/i.test(file.name)
+        ? `${file.name} is a HEIC photo, which browsers can't read. Export it as JPEG first.`
+        : `${file.name} could not be read as an image.`,
+    )
+  })
   const scale = Math.min(1, maxSize / Math.max(bitmap.width, bitmap.height))
   const canvas = document.createElement('canvas')
   canvas.width = Math.round(bitmap.width * scale)
@@ -176,15 +189,61 @@ async function resizeImage(file: File, maxSize = 1600): Promise<Blob> {
 }
 
 export async function uploadPhoto(file: File, day: number) {
-  if (!file.type.startsWith('image/')) throw new Error('Please choose an image file.')
+  // Some systems leave `type` empty (e.g. HEIC on Windows), so fall back to the extension.
+  if (!file.type.startsWith('image/') && !/\.(jpe?g|png|webp|avif|gif|bmp|hei[cf])$/i.test(file.name)) {
+    throw new Error(`${file.name} is not an image file.`)
+  }
   const blob = await resizeImage(file)
   const path = `day${day}/${crypto.randomUUID()}.jpg`
   const { error } = await supabase.storage.from(PHOTO_BUCKET).upload(path, blob, { contentType: 'image/jpeg' })
   if (error) {
-    if (/row-level security|unauthorized|jwt/i.test(error.message)) throw new AuthExpiredError()
+    if (/row-level security|unauthorized|jwt/i.test(error.message)) throw new AuthExpiredError(error.message)
     throw new Error(error.message)
   }
   return supabase.storage.from(PHOTO_BUCKET).getPublicUrl(path).data.publicUrl
+}
+
+/** The object path inside the photo bucket for one of its public URLs, or null for any other URL. */
+function bucketPath(url: string) {
+  const marker = `/storage/v1/object/public/${PHOTO_BUCKET}/`
+  const at = url.indexOf(marker)
+  return at === -1 ? null : decodeURIComponent(url.slice(at + marker.length).split('?')[0])
+}
+
+/**
+ * Deletes a photo from the bucket, then takes it off every live update and recap that shows it,
+ * so the live page never points at a missing file.
+ */
+export async function deleteBucketPhoto(url: string) {
+  const path = bucketPath(url)
+  if (!path) throw new Error('Only photos stored in the bucket can be deleted.')
+
+  const bucket = supabase.storage.from(PHOTO_BUCKET)
+  const { data: removed, error } = await bucket.remove([path])
+  if (error) {
+    if (/row-level security|unauthorized|jwt/i.test(error.message)) throw new AuthExpiredError(error.message)
+    throw new Error(error.message)
+  }
+  // Nothing removed means RLS blocked it or the file was already gone; only the first is an error.
+  if (!removed?.length) {
+    const slash = path.lastIndexOf('/')
+    const { data: still } = await bucket.list(path.slice(0, Math.max(slash, 0)), { search: path.slice(slash + 1) })
+    if (still?.some((item) => item.name === path.slice(slash + 1))) throw new AuthExpiredError('The photo was not deleted.')
+  }
+
+  const [updates, recaps] = await Promise.all([
+    supabase.from('live_updates').update({ image_url: null }).eq('image_url', url),
+    supabase.from('day_recaps').select('day, images').contains('images', [url]),
+  ])
+  check(updates.error)
+  check(recaps.error)
+  // Leave updated_at alone: the admin recap form is keyed on it and would lose unsaved edits.
+  const results = await Promise.all(
+    ((recaps.data ?? []) as Pick<DayRecap, 'day' | 'images'>[]).map((r) =>
+      supabase.from('day_recaps').update({ images: r.images.filter((src) => src !== url) }).eq('day', r.day),
+    ),
+  )
+  for (const r of results) check(r.error)
 }
 
 const IMAGE_FILE = /\.(jpe?g|png|webp|avif|gif)$/i

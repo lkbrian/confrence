@@ -31,7 +31,7 @@ export default function Lightbox({ photos, index, onChange }: LightboxProps) {
           aria-modal="true"
           aria-label="Photo viewer"
         >
-          <img src={photos[index!]} alt="" className="max-h-full max-w-full rounded-sm object-contain" onClick={(e) => e.stopPropagation()} />
+          <img src={photos[index!]} alt="" className="max-h-full max-w-full rounded-xs object-contain" onClick={(e) => e.stopPropagation()} />
           <button type="button" aria-label="Close" onClick={() => onChange(null)} className="absolute right-4 top-4 rounded-sm bg-white/10 p-2 text-white transition hover:bg-white/20">
             <X size={22} />
           </button>

@@ -1,38 +1,5 @@
 import { ImageIcon } from 'lucide-react'
 
-type PhotoGridProps = { title: string; photos: string[]; onOpen: (src: string) => void; emptyMessage: string }
-
-/** The day's gallery (update and recap photos) as a full-width masonry: photos keep their own shape. */
-export default function PhotoGrid({ title, photos, onOpen, emptyMessage }: PhotoGridProps) {
-  return (
-    <section>
-      <div className="mb-4 flex items-end justify-between gap-3">
-        <div>
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-red">Gallery</p>
-          <h2 className="mt-1 text-xl font-extrabold text-stone-950">{title}</h2>
-        </div>
-        {photos.length > 0 && <p className="text-sm text-stone-500">{photos.length} photo{photos.length === 1 ? '' : 's'}</p>}
-      </div>
-      {photos.length === 0 ? (
-        <EmptyPhotos message={emptyMessage} />
-      ) : (
-        <div className="columns-2 gap-2 sm:columns-3 sm:gap-3 lg:columns-4 2xl:columns-5">
-        {photos.map((src, i) => (
-          <button
-            key={src + i}
-            type="button"
-            onClick={() => onOpen(src)}
-            className="mb-2 block w-full break-inside-avoid overflow-hidden rounded-sm bg-stone-200 sm:mb-3"
-          >
-            <img src={src} alt="" loading="lazy" className="block h-auto w-full transition duration-300 hover:scale-[1.03]" />
-          </button>
-        ))}
-      </div>
-      )}
-    </section>
-  )
-}
-
 /** Placeholder where photos will go: faint tiles behind a dashed border, with a message on top. */
 export function EmptyPhotos({ message, compact = false }: { message: string; compact?: boolean }) {
   return (

@@ -6,7 +6,6 @@ import DaysRecap from '@/components/user/happening/DaysRecap'
 import Lightbox from '@/components/user/happening/Lightbox'
 import LiveHero from '@/components/user/happening/LiveHero'
 import NewsTicker from '@/components/user/happening/NewsTicker'
-import PhotoGrid from '@/components/user/happening/PhotoGrid'
 import UpNext from '@/components/user/happening/UpNext'
 import UpdatesFeed from '@/components/user/happening/UpdatesFeed'
 import { useHappening } from '@/lib/happening'
@@ -89,14 +88,6 @@ export default function Happening() {
                   onOpenPhotos={(list, index) => setLightbox({ photos: list, index })}
                 />
               </div>
-            </div>
-            <div className="mx-auto mt-8 max-w-7xl lg:mt-10">
-              <PhotoGrid
-                title={isToday ? 'Recap of the day' : `Day ${selected + 1} recap`}
-                photos={photos}
-                onOpen={openPhoto}
-                emptyMessage={isToday ? 'Photos from today will appear here as they’re shared.' : `No photos from Day ${selected + 1} yet.`}
-              />
             </div>
           </>
         )}

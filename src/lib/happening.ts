@@ -271,3 +271,26 @@ export async function listBucketPhotos() {
     .sort((a, b) => (b.created_at ?? '').localeCompare(a.created_at ?? ''))
     .map((item) => bucket.getPublicUrl(item.name).data.publicUrl)
 }
+
+/**
+ * Photos for one conference day: that day's recap images, then the files uploaded to day{n}/
+ * (newest first), then photo updates (which may point anywhere).
+ */
+export async function listDayPhotos(day: number) {
+  const bucket = supabase.storage.from(PHOTO_BUCKET)
+  const [files, recap, updates] = await Promise.all([
+    bucket.list(`day${day}`, { limit: 100, sortBy: { column: 'created_at', order: 'desc' } }),
+    supabase.from('day_recaps').select('images').eq('day', day).maybeSingle(),
+    supabase.from('live_updates').select('image_url').eq('day', day).not('image_url', 'is', null),
+  ])
+
+  // Recap images first: those are the ones an admin picked.
+  const urls = [
+    ...((recap.data?.images as string[] | undefined) ?? []),
+    ...(files.data ?? [])
+      .filter((item) => item.id !== null && IMAGE_FILE.test(item.name))
+      .map((item) => bucket.getPublicUrl(`day${day}/${item.name}`).data.publicUrl),
+    ...(updates.data ?? []).map((row) => row.image_url as string),
+  ]
+  return [...new Set(urls)]
+}

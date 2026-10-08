@@ -49,6 +49,13 @@ export default function NavigationDrawer({ isOpen, isScrolled, activeSection, on
           >
             <span className="h-2 w-2 animate-pulse rounded-full bg-brand-red" /> Live updates
           </Link>
+          <Link
+            to="/next-conference"
+            onClick={onClose}
+            className={`px-6 py-3 text-base font-semibold transition hover:bg-current/10 ${isScrolled ? 'text-brand-dark' : 'text-white'}`}
+          >
+            2027 Conference
+          </Link>
           {drawerItems.map(({ label, id }) => (
             <a
               key={id}

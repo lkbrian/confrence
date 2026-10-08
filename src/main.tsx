@@ -12,15 +12,16 @@ import AdminSchedules from './pages/admin/AdminSchedules.tsx'
 import Login from './pages/admin/Login.tsx'
 import Foreword from './pages/Foreword.tsx'
 import Happening from './pages/Happening.tsx'
-import Registrations from './pages/Registrations.tsx'
+import NextConference from './pages/NextConference.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/registrations" element={<Registrations />} />
+        <Route path="/registrations" element={<Navigate to="/admin/registrations" replace />} />
         <Route path="/foreword/:slug" element={<Foreword />} />
         <Route path="/happening" element={<Happening />} />
+        <Route path="/next-conference" element={<NextConference />} />
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Navigate to="/admin/dashboard" replace />} />
           <Route path="login" element={<Login />} />

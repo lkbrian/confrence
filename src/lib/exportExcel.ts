@@ -1,6 +1,11 @@
-import type { PublicRegistration } from './supabase'
+export type ExcelColumn<T> = {
+  header: string
+  width: number
+  value: (row: T) => string
+}
 
-export async function downloadRegistrationsExcel(rows: PublicRegistration[]) {
+/** Downloads `rows` as a one-sheet workbook named `<filePrefix>-<today>.xlsx`. */
+export async function downloadExcel<T>(filePrefix: string, columns: ExcelColumn<T>[], rows: T[]) {
   // Loaded on demand so ExcelJS stays out of the main bundle
   const { default: ExcelJS } = await import('exceljs')
 
@@ -14,18 +19,11 @@ export async function downloadRegistrationsExcel(rows: PublicRegistration[]) {
 
   sheet.columns = [
     { header: '#', key: 'index', width: 6 },
-    { header: 'Full Name', key: 'name', width: 36 },
-    { header: 'Email', key: 'email', width: 40 },
-    { header: 'M-Pesa Code', key: 'mpesa_code', width: 18 },
+    ...columns.map((col, i) => ({ header: col.header, key: `c${i}`, width: col.width })),
   ]
 
   rows.forEach((row, i) => {
-    sheet.addRow({
-      index: i + 1,
-      name: row.name.replace(/\s+/g, ' ').trim(),
-      email: row.email.trim(),
-      mpesa_code: row.mpesa_code.trim().toUpperCase(),
-    })
+    sheet.addRow({ index: i + 1, ...Object.fromEntries(columns.map((col, c) => [`c${c}`, col.value(row)])) })
   })
 
   const header = sheet.getRow(1)
@@ -33,7 +31,7 @@ export async function downloadRegistrationsExcel(rows: PublicRegistration[]) {
   header.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FF042A35' } }
   header.alignment = { vertical: 'middle' }
   header.height = 22
-  sheet.autoFilter = { from: 'A1', to: 'D1' }
+  sheet.autoFilter = { from: { row: 1, column: 1 }, to: { row: 1, column: columns.length + 1 } }
 
   const buffer = await workbook.xlsx.writeBuffer()
   const blob = new Blob([buffer], {
@@ -42,7 +40,7 @@ export async function downloadRegistrationsExcel(rows: PublicRegistration[]) {
   const url = URL.createObjectURL(blob)
   const link = document.createElement('a')
   link.href = url
-  link.download = `registrations-${new Date().toISOString().slice(0, 10)}.xlsx`
+  link.download = `${filePrefix}-${new Date().toISOString().slice(0, 10)}.xlsx`
   document.body.appendChild(link)
   link.click()
   link.remove()

@@ -41,7 +41,7 @@ export default function NavigationDrawer({ isOpen, isScrolled, activeSection, on
             <X size={20} />
           </button>
         </div>
-        <nav className="flex flex-col gap-1 ">
+        <nav className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto overscroll-contain">
           <Link
             to="/happening"
             onClick={onClose}
@@ -55,6 +55,13 @@ export default function NavigationDrawer({ isOpen, isScrolled, activeSection, on
             className={`px-6 py-3 text-base font-semibold transition hover:bg-current/10 ${isScrolled ? 'text-brand-dark' : 'text-white'}`}
           >
             2027 Conference
+          </Link>
+          <Link
+            to="/feedback"
+            onClick={onClose}
+            className={`px-6 py-3 text-base font-semibold transition hover:bg-current/10 ${isScrolled ? 'text-brand-dark' : 'text-white'}`}
+          >
+            Feedback
           </Link>
           {drawerItems.map(({ label, id }) => (
             <a

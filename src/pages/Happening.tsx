@@ -1,4 +1,4 @@
-import { AlertCircle, ArrowLeft, Loader2 } from 'lucide-react'
+import { AlertCircle, ArrowLeft, Loader2, MessageSquare } from 'lucide-react'
 import { useLayoutEffect, useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import AnnouncementList from '@/components/user/happening/AnnouncementList'
@@ -48,9 +48,14 @@ export default function Happening() {
           <Link to="/" className="flex items-center rounded-sm bg-white p-1">
             <img className="w-40 sm:w-56" src="/aic-logo.png" alt="AIC Pastors Conference" />
           </Link>
-          <Link to="/" className="inline-flex items-center gap-2 rounded-sm bg-brand-red px-4 py-2 text-sm font-bold text-white shadow-lg transition hover:bg-brand-dark">
-            <ArrowLeft size={16} /> <span className="hidden sm:inline">Back to site</span><span className="sm:hidden">Home</span>
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link to="/feedback" aria-label="Feedback" className="inline-flex items-center gap-2 rounded-sm bg-white/15 px-4 py-2 text-sm font-bold text-white shadow-lg backdrop-blur transition hover:bg-white/25">
+              <MessageSquare size={16} /> <span className="hidden sm:inline">Feedback</span>
+            </Link>
+            <Link to="/" className="inline-flex items-center gap-2 rounded-sm bg-brand-red px-4 py-2 text-sm font-bold text-white shadow-lg transition hover:bg-brand-dark">
+              <ArrowLeft size={16} /> <span className="hidden sm:inline">Back to site</span><span className="sm:hidden">Home</span>
+            </Link>
+          </div>
         </div>
       </header>
 

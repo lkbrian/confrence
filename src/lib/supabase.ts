@@ -54,3 +54,25 @@ export async function fetchRegistrations() {
 
   return all
 }
+
+export async function submitFeedback(payload: { name: string | null; rating: number | null; message: string }) {
+  const { error } = await supabase.from('feedback').insert(payload)
+  if (error) throw new Error(error.code === '23514' ? 'Please check your message and try again.' : error.message)
+}
+
+export type FeedbackEntry = {
+  id: string
+  name: string | null
+  rating: number | null
+  message: string
+  created_at: string
+}
+
+export async function fetchFeedback() {
+  const { data, error } = await supabase
+    .from('feedback')
+    .select('id, name, rating, message, created_at')
+    .order('created_at', { ascending: false })
+  if (error) throw new Error(error.message)
+  return (data ?? []) as FeedbackEntry[]
+}

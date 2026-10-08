@@ -15,6 +15,7 @@ import {
   type FourthRegistration,
 } from '@/lib/fourthConference'
 import type { RegistrationStatus } from '@/lib/types/ui'
+import PhotoBackdrop from '@/components/user/PhotoBackdrop'
 
 const inputClass =
   'w-full rounded-lg border border-stone-200 bg-stone-50 py-3 pl-11 pr-4 text-sm outline-none transition focus:border-brand-red focus:ring-2 focus:ring-brand-red/20'
@@ -146,7 +147,6 @@ export default function NextConference() {
     setNotice(message)
     setView('mine')
     setStatus('idle')
-    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
@@ -202,6 +202,7 @@ export default function NextConference() {
       </header>
 
       <section className="relative overflow-hidden bg-brand-dark px-5 pb-24 pt-14 text-white lg:px-8 lg:pb-32 lg:pt-20">
+        <PhotoBackdrop />
         <div aria-hidden="true" className="pointer-events-none absolute -right-32 -top-32 size-96 rounded-full bg-brand-green/20 blur-3xl" />
         <div aria-hidden="true" className="pointer-events-none absolute -bottom-40 -left-24 size-96 rounded-full bg-brand-red/15 blur-3xl" />
 
@@ -246,7 +247,7 @@ export default function NextConference() {
       </section>
 
       <section className="relative px-5 pb-20 lg:px-8">
-        <motion.div {...revealProps} className="mx-auto -mt-14 max-w-2xl lg:-mt-20">
+        <motion.div {...revealProps} className="relative z-10 mx-auto -mt-14 max-w-2xl lg:-mt-20">
           {view === 'mine' && mine ? (
             <MyRegistration registration={mine} notice={notice} onBack={() => setView('form')} />
           ) : (

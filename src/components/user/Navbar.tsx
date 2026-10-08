@@ -76,6 +76,12 @@ export default function Navbar() {
             </span>
             Live
           </Link>
+          <Link
+            to="/feedback"
+            className={`hidden md:inline-flex items-center px-1 py-2 text-sm font-bold uppercase tracking-wider transition-colors ${isScrolled ? 'text-brand-dark hover:text-brand-red' : 'text-white hover:text-white/75'}`}
+          >
+            Feedback
+          </Link>
           <button
             type="button"
             aria-expanded={open}

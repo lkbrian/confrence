@@ -10,6 +10,8 @@ import AdminHappening from './pages/admin/AdminHappening.tsx'
 import AdminRegistrations from './pages/admin/AdminRegistrations.tsx'
 import AdminSchedules from './pages/admin/AdminSchedules.tsx'
 import Login from './pages/admin/Login.tsx'
+import Feedback from './pages/Feedback.tsx'
+import Feedbacks from './pages/Feedbacks.tsx'
 import Foreword from './pages/Foreword.tsx'
 import Happening from './pages/Happening.tsx'
 import NextConference from './pages/NextConference.tsx'
@@ -22,6 +24,8 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/foreword/:slug" element={<Foreword />} />
         <Route path="/happening" element={<Happening />} />
         <Route path="/next-conference" element={<NextConference />} />
+        <Route path="/feedback" element={<Feedback />} />
+        <Route path="/feedbacks" element={<Feedbacks />} />
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Navigate to="/admin/dashboard" replace />} />
           <Route path="login" element={<Login />} />

@@ -1,6 +1,7 @@
 import { CalendarDays, Mail, MapPin } from 'lucide-react'
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube } from 'react-icons/fa'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { revealProps } from '../../lib/motion'
 
 const footerGroups = [
@@ -81,6 +82,9 @@ export default function Footer() {
             <ul className="mt-4 space-y-3 text-sm text-white/70">
               <li>
                 <a href="#contact" className="transition-colors hover:text-brand-green">Contact the team</a>
+              </li>
+              <li>
+                <Link to="/feedback" className="transition-colors hover:text-brand-green">Share your feedback</Link>
               </li>
               <li>
                 <a href="#register" className="transition-colors hover:text-brand-green">Register for the conference</a>
